@@ -1,0 +1,97 @@
+ext {
+    android = [
+            compileSdkVersion: 29,
+            minSdkVersion    : 21,
+            targetSdkVersion : 29,
+            versionCode      : 1,
+            versionName      : "1.0.0",
+            buildToolsVersion: "29.0.3"
+    ]
+
+    google = [
+            "material"     : 'com.google.android.material:material:1.2.1',
+            "materialalpha": 'com.google.android.material:material:1.3.0-alpha03',
+    ]
+    test = [
+            "junit"   : 'junit:junit:4.+',
+            "extjunit": 'androidx.test.ext:junit:1.1.2',
+            "espresso": 'androidx.test.espresso:espresso-core:3.3.0',
+    ]
+
+    coroutines = [
+            // Kotlin
+            "kotlinStdlib"            : "org.jetbrains.kotlin:kotlin-stdlib:1.4.32",
+            // 协程核心库
+            "kotlinxCoroutinesCore"   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3",
+            // 协程Android支持库
+            "kotlinxCoroutinesAndroid": "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3",
+            // 协程Java8支持库
+            "kotlinxCoroutinesJdk8"   : "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.4.3"
+    ]
+
+    jetpackext = [
+            "lifecycleViewmodelKtx": "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0",
+            "lifecycleRuntimeKtx"  : "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0",
+            "lifecycleLivedataKtx" : "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+    ]
+    androidx = [
+            //分包
+            "multidex"        : 'androidx.multidex:multidex:2.0.1',
+            "constraintlayout": 'androidx.constraintlayout:constraintlayout:2.0.4',
+            "cardview"        : 'androidx.cardview:cardview:1.0.0',
+            "fragment"        : "androidx.fragment:fragment-ktx:1.2.5",
+            "core"            : 'androidx.core:core-ktx:1.3.2',
+            "appcompat"       : 'androidx.appcompat:appcompat:1.2.0',
+    ]
+    rxjava = [
+            "rxandroid": 'io.reactivex.rxjava2:rxandroid:2.1.0',
+            "rxjava"   : "io.reactivex.rxjava2:rxjava:2.2.4",
+    ]
+
+    http = [
+            "retrofit"                   : "com.squareup.retrofit2:retrofit:2.9.0",
+            "converter_gson"             : "com.squareup.retrofit2:converter-gson:2.9.0",
+            "retrofit-adapter-rxjava2"   : "com.squareup.retrofit2:adapter-rxjava2:2.9.0",
+            "okhttp3"                    : "com.squareup.okhttp3:okhttp:3.4.1",
+            "okhttp3-logging-interceptor": "com.squareup.okhttp3:logging-interceptor:3.4.1",
+    ]
+
+
+    other = [
+            //util
+            "utilcodex"                    : "com.blankj:utilcodex:1.26.0",
+
+
+
+
+
+            //管理界面状态库
+            loadsir                        : 'com.kingja.loadsir:loadsir:1.3.8',
+
+            //屏幕适配
+            "autosize"                     : 'me.jessyan:autosize:1.2.1',
+
+            // ViewModel
+            "viewmodel"                    : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0",
+            // LiveData
+            "livedata"                     : "androidx.lifecycle:lifecycle-livedata-ktx:2.3.0",
+            "runtime"                      : "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0",
+
+            //html解析
+            "jsoup"                        : 'org.jsoup:jsoup:1.9.2',
+            "logger"                       : 'com.orhanobut:logger:2.2.0',
+
+    ]
+
+
+
+    google_library = google.values()
+    androidx_library = androidx.values()
+    rxjava_library = rxjava.values()
+    otherLibs = other.values()
+    http_library = http.values()
+    coroutinesLib = coroutines.values()
+    jetpackextLib = jetpackext.values()
+    app_library = [google_library, androidx_library, http_library, otherLibs, jetpackextLib]
+
+}
