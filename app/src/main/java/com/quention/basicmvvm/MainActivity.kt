@@ -13,12 +13,13 @@ class MainActivity : BaseActivity<TestViewModel, ActivityMainBinding>() {
     }
 
     override fun initData() {
-        mViewModel.getHomeData("12")
+        mViewModel.getBannerData()
     }
 
     override fun initObserver() {
         mViewModel.data.observe(this, { t ->
             t?.let {
+                mViewBinding.testTv.text = it.toString()
                 AppLoge(it.toString())
             }
         })

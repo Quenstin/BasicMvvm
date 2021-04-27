@@ -12,6 +12,6 @@ class Application:BaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        RetrofitFactory.mBaseUrl="https://2020.fc62.com/bbs/"
+        RetrofitFactory.mBaseUrl="https://wanandroid.com/"
     }
 }

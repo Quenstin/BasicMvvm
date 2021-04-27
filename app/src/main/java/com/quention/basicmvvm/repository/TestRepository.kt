@@ -10,9 +10,9 @@ import kotlinx.coroutines.withContext
  * function is ：
  */
 class TestRepository:ApiRepository() {
-    suspend fun getHome(str: String): TestBean {
+    suspend fun getBanner(): TestBean {
         return withContext(Dispatchers.IO) {
-            apiService.homeApi(str)
+            apiService.getBanner()
         }
     }
 }

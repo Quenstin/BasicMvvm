@@ -15,9 +15,9 @@ class TestViewModel:BaseViewModel<TestRepository>() {
 
     val data = MutableLiveData<TestBean>()
 
-    fun getHomeData(nianji: String) {
+    fun getBannerData() {
         simpleLaunch(block = {
-            data.value = mRepository.getHome(nianji)
+            data.value = mRepository.getBanner()
         })
     }
 }
