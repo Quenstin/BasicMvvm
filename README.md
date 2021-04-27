@@ -6,7 +6,7 @@
   
 第二步：
   app gradle:
-  implementation 'com.github.Quenstin:BasicMvvm:1.0.1'
+  implementation 'com.github.Quenstin:BasicMvvm:latest'
   ![image](https://user-images.githubusercontent.com/26788041/116022980-d9323080-a67d-11eb-916e-ba224f948980.png)
 
 第三步：
