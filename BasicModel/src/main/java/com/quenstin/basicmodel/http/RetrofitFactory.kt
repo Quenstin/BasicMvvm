@@ -16,8 +16,6 @@ import java.util.concurrent.TimeUnit
  * function is ：
  */
 class RetrofitFactory private constructor() {
-    private val mBaseUrl = "https://2020.fc62.com/bbs/"
-    private val BASE_URL = "https://www.baidu.com"
 
 
     private val mRetrofit: Retrofit
@@ -27,6 +25,7 @@ class RetrofitFactory private constructor() {
     }
 
     init {
+
         mRetrofit =
             Retrofit.Builder().baseUrl(mBaseUrl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -37,6 +36,7 @@ class RetrofitFactory private constructor() {
     }
 
     companion object {
+        var mBaseUrl = "https://www.baidu.com"
         val instance by lazy {
             RetrofitFactory()
         }
@@ -77,7 +77,6 @@ class RetrofitFactory private constructor() {
         }
 
     }
-
 
 
     /**

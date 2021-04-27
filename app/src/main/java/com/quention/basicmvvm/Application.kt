@@ -1,6 +1,7 @@
 package com.quention.basicmvvm
 
 import com.quenstin.basicmodel.BaseApplication
+import com.quenstin.basicmodel.http.RetrofitFactory
 
 /**
  * Created by hdyjzgq
@@ -8,4 +9,9 @@ import com.quenstin.basicmodel.BaseApplication
  * function is ：
  */
 class Application:BaseApplication() {
+
+    override fun onCreate() {
+        super.onCreate()
+        RetrofitFactory.mBaseUrl="https://2020.fc62.com/bbs/"
+    }
 }

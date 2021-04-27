@@ -40,5 +40,5 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(path: ':BasicModel')
-//    implementation 'com.github.Quenstin:BasicMvvm:1.0.0'
+//    implementation 'com.github.Quenstin:BasicMvvm:1.0.1'
 }
