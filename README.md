@@ -13,3 +13,8 @@
   配置项目中的请求地址baseUrl
 ![image](https://user-images.githubusercontent.com/26788041/116180263-2c25e980-a74b-11eb-997f-233c477a6094.png)
 
+第四步：
+  实现BaseRepository来自定义自己的ApiRepository，后续的Repository都实现ApiRepository
+  ![image](https://user-images.githubusercontent.com/26788041/116182891-96d92400-a74f-11eb-9b27-fe1c3e353f46.png)
+
+
