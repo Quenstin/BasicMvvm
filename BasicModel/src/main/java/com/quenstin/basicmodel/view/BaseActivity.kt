@@ -49,11 +49,15 @@ abstract class BaseActivity<VM : BaseViewModel<*>, VB : ViewBinding> : AppCompat
      */
     abstract fun layoutId(): Int
 
-
     /**
-     * 初始化
+     * 初始化view
      */
     abstract fun initView()
+
+    /**
+     * 初始化数据源or请求
+     */
+    abstract fun initData()
 
     /**
      * 订阅liveData
@@ -72,6 +76,7 @@ abstract class BaseActivity<VM : BaseViewModel<*>, VB : ViewBinding> : AppCompat
         mViewModel = initViewModel()
         mViewModel.loadState.observe(this, observer)
         initView()
+        initData()
         initObserver()
 
 
@@ -152,11 +157,12 @@ abstract class BaseActivity<VM : BaseViewModel<*>, VB : ViewBinding> : AppCompat
                 when (it.code) {
                     StateType.SUCCESS -> showSuccess()
                     StateType.LOADING -> showLoading()
-                    StateType.ERROR -> showError(2, it.message)
                     StateType.NETWORK_ERROR -> showError(0, "")
                     StateType.TIP -> showTip(it.message)
                     StateType.EMPTY -> showEmpty()
                     StateType.JSON -> showError(1, "")
+                    StateType.TIMEOUT -> showError(2, it.message)
+                    else -> showError(2, it.message)
                 }
             }
         }

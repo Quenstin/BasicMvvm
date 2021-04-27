@@ -5,10 +5,14 @@ import com.quenstin.basicmodel.view.BaseActivity
 import com.quention.basicmvvm.databinding.ActivityMainBinding
 import com.quention.basicmvvm.viewModel.TestViewModel
 
-class MainActivity : BaseActivity<TestViewModel,ActivityMainBinding>() {
-    override fun layoutId()=R.layout.activity_main
+class MainActivity : BaseActivity<TestViewModel, ActivityMainBinding>() {
+    override fun layoutId() = R.layout.activity_main
 
     override fun initView() {
+
+    }
+
+    override fun initData() {
         mViewModel.getHomeData("12")
     }
 
@@ -19,5 +23,6 @@ class MainActivity : BaseActivity<TestViewModel,ActivityMainBinding>() {
             }
         })
     }
+
 
 }

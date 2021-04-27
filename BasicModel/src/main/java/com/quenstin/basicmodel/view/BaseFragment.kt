@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
+import com.blankj.utilcode.util.ToastUtils
 import com.quenstin.basicmodel.state.State
 import com.quenstin.basicmodel.state.StateType
 import com.quenstin.basicmodel.utils.getVmClass
@@ -18,9 +19,7 @@ import com.quenstin.basicmodel.viewmodel.BaseViewModel
 import com.kingja.loadsir.callback.SuccessCallback
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
-import com.quenstin.basicmodel.state.callback.EmptyCallBack
-import com.quenstin.basicmodel.state.callback.ErrorCallBack
-import com.quenstin.basicmodel.state.callback.LoadingCallBack
+import com.quenstin.basicmodel.state.callback.*
 
 /**
  * Created by hdyjzgq
@@ -49,19 +48,26 @@ abstract class BaseFragment<VM : BaseViewModel<*>, VB : ViewBinding> : Fragment(
         mViewModel = initViewModel()
         mViewModel.loadState.observe(viewLifecycleOwner, observer)
         initView()
+        initData()
     }
 
     /**
      * 当前视图的布局
      * 其实有了viewBind可以不绑定但是为了方便查看布局
      */
-    abstract fun layoutId():Int
+    abstract fun layoutId(): Int
 
-    protected abstract fun initView()
+    /**
+     * 初始化view
+     */
+    abstract fun initView()
 
-    abstract fun showLoading(message: String = "请求网络中...")
+    /**
+     * 初始化数据源or请求
+     */
+    abstract fun initData()
 
-    abstract fun dismissLoading()
+
 
     /**
      * 加载中
@@ -79,13 +85,25 @@ abstract class BaseFragment<VM : BaseViewModel<*>, VB : ViewBinding> : Fragment(
 
     /**
      * 加载失败
+     * 0:网络异常
+     * 1:解析异常
+     * 2:其他异常
      */
-    private fun showError(msg: String) {
-        if (!TextUtils.isEmpty(msg)) {
-
-            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+    open fun showError(state: Int, msg: String) {
+        if (msg.isNotEmpty()) {
+            ToastUtils.showShort(msg)
         }
-        loadService.showCallback(ErrorCallBack::class.java)
+        when (state) {
+            0 -> {
+                loadService.showCallback(HttpErrorCallBack::class.java)
+            }
+            1 -> {
+                loadService.showCallback(JsonErrorCallBack::class.java)
+            }
+            else -> {
+                loadService.showCallback(ErrorCallBack::class.java)
+            }
+        }
     }
 
     /**
@@ -106,7 +124,7 @@ abstract class BaseFragment<VM : BaseViewModel<*>, VB : ViewBinding> : Fragment(
     }
 
     /**
-     * 页面状态
+     * 加载状态
      */
     private val observer by lazy {
         Observer<State> {
@@ -114,10 +132,12 @@ abstract class BaseFragment<VM : BaseViewModel<*>, VB : ViewBinding> : Fragment(
                 when (it.code) {
                     StateType.SUCCESS -> showSuccess()
                     StateType.LOADING -> showLoading()
-                    StateType.ERROR -> showTip(it.message)
-                    StateType.NETWORK_ERROR -> showError("网络异常")
+                    StateType.NETWORK_ERROR -> showError(0, "")
                     StateType.TIP -> showTip(it.message)
                     StateType.EMPTY -> showEmpty()
+                    StateType.JSON -> showError(1, "")
+                    StateType.TIMEOUT -> showError(2, it.message)
+                    else -> showError(2, it.message)
                 }
             }
         }

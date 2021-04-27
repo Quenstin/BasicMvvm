@@ -2,10 +2,8 @@ package com.quenstin.basicmodel.widget.loading
 
 import android.annotation.TargetApi
 import android.content.Context
-import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.Color
-import android.graphics.Rect
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -21,32 +19,16 @@ import com.quenstin.basicmodel.utils.AppLoge
  * data on 4/21/21
  * function is ：加载view
  */
-class LoadingIndicatorView(
-    context: Context,
-    attrs: AttributeSet,
-    defStyleAttr: Int,
-    defStyleRes: Int
-) : View(context, attrs, defStyleAttr, defStyleRes) {
-
-    private val MIN_SHOW_TIME = 500 // ms
-
-    private val MIN_DELAY = 500 // ms
-
-
+class LoadingIndicatorView : View {
     private var mStartTime: Long = -1
-
     private var mPostedHide = false
-
     private var mPostedShow = false
-
     private var mDismissed = false
-
     private val mDelayedHide = Runnable {
         mPostedHide = false
         mStartTime = -1
         visibility = GONE
     }
-
     private val mDelayedShow = Runnable {
         mPostedShow = false
         if (!mDismissed) {
@@ -54,44 +36,59 @@ class LoadingIndicatorView(
             visibility = VISIBLE
         }
     }
-
     var mMinWidth = 0
     var mMaxWidth = 0
     var mMinHeight = 0
     var mMaxHeight = 0
-
     private var mIndicator: Indicator? = null
     private var mIndicatorColor = 0
-
     private var mShouldStartAnimationDrawable = false
 
-    init {
+    constructor(context: Context) : super(context) {
+        init(context, null, 0, 0)
+    }
 
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+        init(context, attrs, 0, R.style.LoadingIndicatorView)
+    }
+
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+            context,
+            attrs,
+            defStyleAttr
+    ) {
         init(context, attrs, defStyleAttr, R.style.LoadingIndicatorView)
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    constructor(
+            context: Context,
+            attrs: AttributeSet?,
+            defStyleAttr: Int,
+            defStyleRes: Int
+    ) : super(context, attrs, defStyleAttr, defStyleRes) {
+        init(context, attrs, defStyleAttr, R.style.LoadingIndicatorView)
+    }
 
-    private fun init(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) {
+    private fun init(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) {
         mMinWidth = 24
         mMaxWidth = 48
         mMinHeight = 24
         mMaxHeight = 48
-        val a: TypedArray = context.obtainStyledAttributes(
-            attrs, R.styleable.LoadingIndicatorView, defStyleAttr, defStyleRes
+        val a = context.obtainStyledAttributes(
+                attrs, R.styleable.LoadingIndicatorView, defStyleAttr, defStyleRes
         )
         mMinWidth = a.getDimensionPixelSize(R.styleable.LoadingIndicatorView_minWidth, mMinWidth)
         mMaxWidth = a.getDimensionPixelSize(R.styleable.LoadingIndicatorView_maxWidth, mMaxWidth)
         mMinHeight =
-            a.getDimensionPixelSize(R.styleable.LoadingIndicatorView_minHeight, mMinHeight)
+                a.getDimensionPixelSize(R.styleable.LoadingIndicatorView_minHeight, mMinHeight)
         mMaxHeight =
-            a.getDimensionPixelSize(R.styleable.LoadingIndicatorView_maxHeight, mMaxHeight)
-        val indicatorName: String? = a.getString(R.styleable.LoadingIndicatorView_indicatorName)
+                a.getDimensionPixelSize(R.styleable.LoadingIndicatorView_maxHeight, mMaxHeight)
+        val indicatorName = a.getString(R.styleable.LoadingIndicatorView_indicatorName)
         mIndicatorColor = a.getColor(R.styleable.LoadingIndicatorView_indicatorColor, Color.WHITE)
-        if (indicatorName != null) {
-            setIndicator(indicatorName)
-        }
+        setIndicator(indicatorName)
         if (mIndicator == null) {
-            setIndicator(BallSpinFadeLoaderIndicator())
+            setIndicator(DEFAULT_INDICATOR)
         }
         a.recycle()
     }
@@ -100,7 +97,7 @@ class LoadingIndicatorView(
         return mIndicator
     }
 
-    private fun setIndicator(d: Indicator) {
+    fun setIndicator(d: Indicator?) {
         if (mIndicator !== d) {
             if (mIndicator != null) {
                 mIndicator!!.callback = null
@@ -115,7 +112,6 @@ class LoadingIndicatorView(
             postInvalidate()
         }
     }
-
 
     /**
      * setIndicatorColor(0xFF00FF00)
@@ -134,7 +130,6 @@ class LoadingIndicatorView(
         mIndicator!!.setColor(color)
     }
 
-
     /**
      * You should pay attention to pass this parameter with two way:
      * for example:
@@ -143,16 +138,16 @@ class LoadingIndicatorView(
      * 2. Class name with full package,like "com.my.android.indicators.SimpleIndicator".
      * @param indicatorName the class must be extend Indicator .
      */
-    fun setIndicator(indicatorName: String) {
+    fun setIndicator(indicatorName: String?) {
         if (TextUtils.isEmpty(indicatorName)) {
             return
         }
         val drawableClassName = StringBuilder()
-        if (!indicatorName.contains(".")) {
+        if (!indicatorName!!.contains(".")) {
             val defaultPackageName = javaClass.getPackage()!!.name
             drawableClassName.append(defaultPackageName)
-                .append(".indicators")
-                .append(".")
+                    .append(".indicators")
+                    .append(".")
         }
         drawableClassName.append(indicatorName)
         try {
@@ -160,7 +155,7 @@ class LoadingIndicatorView(
             val indicator = drawableClass.newInstance() as Indicator
             setIndicator(indicator)
         } catch (e: ClassNotFoundException) {
-            AppLoge( "Didn't find your class , check the name again !")
+            AppLoge("Didn't find your class , check the name again !")
         } catch (e: InstantiationException) {
             e.printStackTrace()
         } catch (e: IllegalAccessException) {
@@ -244,7 +239,7 @@ class LoadingIndicatorView(
     }
 
     override fun onVisibilityChanged(changedView: View, visibility: Int) {
-        super.onVisibilityChanged(changedView, visibility)
+        super.onVisibilityChanged(changedView!!, visibility)
         if (visibility == GONE || visibility == INVISIBLE) {
             stopAnimation()
         } else {
@@ -254,12 +249,12 @@ class LoadingIndicatorView(
 
     override fun invalidateDrawable(dr: Drawable) {
         if (verifyDrawable(dr)) {
-            val dirty: Rect = dr.getBounds()
+            val dirty = dr.bounds
             val scrollX = scrollX + paddingLeft
             val scrollY = scrollY + paddingTop
             invalidate(
-                dirty.left + scrollX, dirty.top + scrollY,
-                dirty.right + scrollX, dirty.bottom + scrollY
+                    dirty.left + scrollX, dirty.top + scrollY,
+                    dirty.right + scrollX, dirty.bottom + scrollY
             )
         } else {
             super.invalidateDrawable(dr)
@@ -316,7 +311,7 @@ class LoadingIndicatorView(
         if (d != null) {
             // Translate canvas so a indeterminate circular progress bar with padding
             // rotates properly in its animation
-            val saveCount: Int = canvas.save()
+            val saveCount = canvas.save()
             canvas.translate(paddingLeft.toFloat(), paddingTop.toFloat())
             d.draw(canvas)
             canvas.restoreToCount(saveCount)
@@ -333,8 +328,8 @@ class LoadingIndicatorView(
         var dh = 0
         val d: Drawable? = mIndicator
         if (d != null) {
-            dw = Math.max(mMinWidth, Math.min(mMaxWidth, d.getIntrinsicWidth()))
-            dh = Math.max(mMinHeight, Math.min(mMaxHeight, d.getIntrinsicHeight()))
+            dw = Math.max(mMinWidth, Math.min(mMaxWidth, d.intrinsicWidth))
+            dh = Math.max(mMinHeight, Math.min(mMaxHeight, d.intrinsicHeight))
         }
         updateDrawableState()
         dw += paddingLeft + paddingRight
@@ -351,15 +346,17 @@ class LoadingIndicatorView(
 
     private fun updateDrawableState() {
         val state = drawableState
-        if (mIndicator != null && mIndicator!!.isStateful()) {
-            mIndicator!!.setState(state)
+        if (mIndicator != null && mIndicator!!.isStateful) {
+            mIndicator!!.state = state
         }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     override fun drawableHotspotChanged(x: Float, y: Float) {
         super.drawableHotspotChanged(x, y)
-        mIndicator?.setHotspot(x, y)
+        if (mIndicator != null) {
+            mIndicator!!.setHotspot(x, y)
+        }
     }
 
     override fun onAttachedToWindow() {
@@ -379,5 +376,12 @@ class LoadingIndicatorView(
     private fun removeCallbacks() {
         removeCallbacks(mDelayedHide)
         removeCallbacks(mDelayedShow)
+    }
+
+    companion object {
+        private const val TAG = "AVLoadingIndicatorView"
+        private val DEFAULT_INDICATOR: BallSpinFadeLoaderIndicator = BallSpinFadeLoaderIndicator()
+        private const val MIN_SHOW_TIME = 500 // ms
+        private const val MIN_DELAY = 500 // ms
     }
 }

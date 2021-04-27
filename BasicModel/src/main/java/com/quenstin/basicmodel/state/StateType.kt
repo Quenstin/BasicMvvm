@@ -13,5 +13,6 @@ enum class StateType {
     LOADING,
     TIP,
     JSON,
+    TIMEOUT
 
 }

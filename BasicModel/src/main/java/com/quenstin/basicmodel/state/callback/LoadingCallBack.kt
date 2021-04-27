@@ -12,5 +12,6 @@ class LoadingCallBack : Callback(){
         return R.layout.layout_loading
     }
 
+    override fun getSuccessVisible()=true
 
 }

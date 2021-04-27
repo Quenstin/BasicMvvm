@@ -23,16 +23,15 @@ class BallSpinFadeLoaderIndicator : Indicator() {
 
     override fun draw(canvas: Canvas?, paint: Paint?) {
         val radius=getWidth()/10
-
-        for (i in 0..8){
+        scaleFloats.forEachIndexed { index, _ ->
             canvas?.apply {
                 save()
-                val point=circleAt(width, height, width / 2 - radius, i * (Math.PI / 4))
+                val point=circleAt(width, height, width / 2 - radius, index * (Math.PI / 4))
                 if (point != null) {
-                    translate(point.x.toFloat(), point.y.toFloat())
+                    translate(point.x, point.y)
                 }
-                scale(scaleFloats[i], scaleFloats[i])
-                paint?.alpha=alphas[i]
+                scale(scaleFloats[index], scaleFloats[index])
+                paint?.alpha=alphas[index]
                 if (paint != null) {
                     drawCircle(0f, 0f, radius.toFloat(), paint)
                 }
