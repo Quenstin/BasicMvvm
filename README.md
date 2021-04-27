@@ -16,5 +16,12 @@
 第四步：
   实现BaseRepository来自定义自己的ApiRepository，后续的Repository都实现ApiRepository
   ![image](https://user-images.githubusercontent.com/26788041/116182891-96d92400-a74f-11eb-9b27-fe1c3e353f46.png)
+  
+  
+PS：
+  后续增加：
+    1:下载上传
+    2:权限申请
+    3:暂时没想出来
 
 
