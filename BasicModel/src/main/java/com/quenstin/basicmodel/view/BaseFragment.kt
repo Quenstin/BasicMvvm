@@ -25,12 +25,14 @@ import com.quenstin.basicmodel.state.callback.*
  * Created by hdyjzgq
  * data on 3/29/21
  * function is ：fragment基类
+ * tip：
+ *      只封装了viewBing，如果是简单页面不需要处理耦合可继承该activity
  */
-abstract class BaseFragment<VM : BaseViewModel<*>, VB : ViewBinding> : Fragment() {
+abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     lateinit var loadService: LoadService<*>
 
     lateinit var mViewBinding: VB
-    lateinit var mViewModel: VM
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,18 +41,28 @@ abstract class BaseFragment<VM : BaseViewModel<*>, VB : ViewBinding> : Fragment(
     ): View? {
         mViewBinding = inflateBindingWithGeneric(layoutInflater)
         loadService = LoadSir.getDefault().register(mViewBinding.root)
-
         return mViewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mViewModel = initViewModel()
-        mViewModel.loadState.observe(viewLifecycleOwner, observer)
+        initViewModel()
         initView()
         initData()
     }
 
+    /**
+     * 初始化viewModel
+     * 用于baseMVVMActivity
+     * 如果没有继承可使用自带的拓展类 by viewModel()来获取
+     */
+    open fun initViewModel(){}
+
+    /**
+     * 当前视图的布局
+     * 其实有了viewBind可以不绑定但是为了方便查看布局
+     */
+    abstract fun layoutId(): Int
 
     /**
      * 初始化view
@@ -61,7 +73,6 @@ abstract class BaseFragment<VM : BaseViewModel<*>, VB : ViewBinding> : Fragment(
      * 初始化数据源or请求
      */
     abstract fun initData()
-
 
 
     /**
@@ -121,7 +132,7 @@ abstract class BaseFragment<VM : BaseViewModel<*>, VB : ViewBinding> : Fragment(
     /**
      * 加载状态
      */
-    private val observer by lazy {
+    val observer by lazy {
         Observer<State> {
             it?.let {
                 when (it.code) {
@@ -138,8 +149,5 @@ abstract class BaseFragment<VM : BaseViewModel<*>, VB : ViewBinding> : Fragment(
         }
     }
 
-    private fun initViewModel(): VM {
-        return ViewModelProvider(this).get(getVmClass(this))
 
-    }
 }

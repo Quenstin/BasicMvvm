@@ -45,12 +45,11 @@ fun <T> BaseViewModel<*>.simpleLaunch(
     if (isShowDialog) loadState.value = State(StateType.LOADING, loadingMessage)
     return viewModelScope.launch {
         try {
-            delay(300)
-            loadState.value = State(StateType.SUCCESS)
             request.invoke(this)
+            loadState.value = State(StateType.SUCCESS)
         } catch (e: Exception) {
-            onError(e, loadState)
             error?.invoke(e)
+            onError(e, loadState)
         }
     }
 }

@@ -22,13 +22,14 @@ import com.kingja.loadsir.core.LoadSir
  * data on 3/29/21
  * function is ：activity基类
  *
- *  ps：
- *      只封装了viewBing和ViewModel
- *      想用dataBing不如学习Compose
+ *  tip：
+ *      只封装了viewBing，如果是简单页面不需要处理耦合可继承该activity
+ *
+ *  ps： 没有dataBing，想用dataBing不如学习Compose
  */
-abstract class BaseActivity<VM : BaseViewModel<*>, VB : ViewBinding> : AppCompatActivity() {
-    lateinit var mViewModel: VM
+abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     lateinit var mViewBinding: VB
+
 
 
     /**
@@ -41,10 +42,13 @@ abstract class BaseActivity<VM : BaseViewModel<*>, VB : ViewBinding> : AppCompat
         }
     }
 
-    /**
-     * 重新加载
-     */
     open fun reLoad() {}
+
+    /**
+     * 当前视图的布局
+     * 其实有了viewBind可以不绑定但是为了方便查看布局
+     */
+    abstract fun layoutId(): Int
 
 
     /**
@@ -69,26 +73,19 @@ abstract class BaseActivity<VM : BaseViewModel<*>, VB : ViewBinding> : AppCompat
         init()
     }
 
-
     private fun init() {
-        mViewModel = initViewModel()
-        mViewModel.loadState.observe(this, observer)
+        initViewModel()
         initView()
         initData()
         initObserver()
-
-
     }
 
     /**
      * 初始化viewModel
-     * 适用于继承了该activity的类
+     * 用于baseMVVMActivity
      * 如果没有继承可使用自带的拓展类 by viewModel()来获取
      */
-    private fun initViewModel(): VM {
-        return ViewModelProvider(this).get(getVmClass(this))
-
-    }
+    open fun initViewModel(){}
 
 
     /**
@@ -149,7 +146,7 @@ abstract class BaseActivity<VM : BaseViewModel<*>, VB : ViewBinding> : AppCompat
     /**
      * 加载状态
      */
-    private val observer by lazy {
+    val observer by lazy {
         Observer<State> {
             it?.let {
                 when (it.code) {

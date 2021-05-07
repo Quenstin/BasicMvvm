@@ -13,6 +13,9 @@ class MainActivity : BaseActivity<TestViewModel, ActivityMainBinding>() {
     }
 
     override fun initData() {
+        mViewBinding.testButton.setOnClickListener {
+            mViewModel.getBannerData()
+        }
         mViewModel.getBannerData()
     }
 
