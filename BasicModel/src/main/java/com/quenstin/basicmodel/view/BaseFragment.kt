@@ -51,11 +51,6 @@ abstract class BaseFragment<VM : BaseViewModel<*>, VB : ViewBinding> : Fragment(
         initData()
     }
 
-    /**
-     * 当前视图的布局
-     * 其实有了viewBind可以不绑定但是为了方便查看布局
-     */
-    abstract fun layoutId(): Int
 
     /**
      * 初始化view

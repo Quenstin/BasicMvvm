@@ -6,7 +6,7 @@ import com.quention.basicmvvm.databinding.ActivityMainBinding
 import com.quention.basicmvvm.viewModel.TestViewModel
 
 class MainActivity : BaseActivity<TestViewModel, ActivityMainBinding>() {
-    override fun layoutId() = R.layout.activity_main
+
 
     override fun initView() {
 
@@ -26,4 +26,7 @@ class MainActivity : BaseActivity<TestViewModel, ActivityMainBinding>() {
     }
 
 
+
+
 }
+

@@ -22,9 +22,9 @@ import com.kingja.loadsir.core.LoadSir
  * data on 3/29/21
  * function is ：activity基类
  *
- *  detail：
+ *  ps：
  *      只封装了viewBing和ViewModel
- *      不他喜欢dataBing，想用dataBing不如学习Compose
+ *      想用dataBing不如学习Compose
  */
 abstract class BaseActivity<VM : BaseViewModel<*>, VB : ViewBinding> : AppCompatActivity() {
     lateinit var mViewModel: VM
@@ -41,13 +41,11 @@ abstract class BaseActivity<VM : BaseViewModel<*>, VB : ViewBinding> : AppCompat
         }
     }
 
+    /**
+     * 重新加载
+     */
     open fun reLoad() {}
 
-    /**
-     * 当前视图的布局
-     * 其实有了viewBind可以不绑定但是为了方便查看布局
-     */
-    abstract fun layoutId(): Int
 
     /**
      * 初始化view

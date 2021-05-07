@@ -25,7 +25,7 @@ import javax.net.ssl.SSLHandshakeException
  * function is ：数据解析的拓展在viewModel中使用
  */
 
-typealias Block<T> = suspend (CoroutineScope) -> T
+typealias Request<T> = suspend (CoroutineScope) -> T
 typealias Error = suspend (Exception) -> Unit
 
 /**
@@ -36,23 +36,44 @@ typealias Error = suspend (Exception) -> Unit
  * loadingMessage：加载中提示信息
  */
 fun <T> BaseViewModel<*>.simpleLaunch(
-        block: Block<T>,
-        error: Error?=null,
-        isShowDialog: Boolean = true,
-        loadingMessage: String = "请求网络中..."
+    request: Request<T>,
+    error: Error? = null,
+    isShowDialog: Boolean = true,
+    loadingMessage: String = "请求网络中..."
 ): Job {
 
-    if (isShowDialog)loadState.value = State(StateType.LOADING, loadingMessage)
+    if (isShowDialog) loadState.value = State(StateType.LOADING, loadingMessage)
     return viewModelScope.launch {
         try {
             delay(300)
             loadState.value = State(StateType.SUCCESS)
-            block.invoke(this)
+            request.invoke(this)
         } catch (e: Exception) {
             onError(e, loadState)
             error?.invoke(e)
         }
     }
+}
+
+fun <T> BaseViewModel<*>.simpleLaunch(init: CoroutineBuilder<T>.() -> Unit) {
+    val result = CoroutineBuilder<T>().apply(init)
+    val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
+        result.onError?.invoke(exception)
+    }
+    viewModelScope.launch(coroutineExceptionHandler) {
+        val res: T? = result.onRequest?.invoke()
+        res?.let {
+            result.onSuccess?.invoke(it)
+        }
+    }
+
+
+}
+
+class CoroutineBuilder<T> {
+    var onRequest: (suspend () -> T)? = null
+    var onSuccess: ((T) -> Unit)? = null
+    var onError: ((Throwable) -> Unit)? = null
 }
 
 /**
@@ -72,12 +93,12 @@ private fun onError(e: Exception, loadState: MutableLiveData<State>) {
             loadState.value = State(StateType.NETWORK_ERROR)
         }
         // 数据解析错误
-        is JSONException, is JsonIOException, is JsonParseException, is JsonSyntaxException ,is ParseException, is MalformedJsonException -> {
+        is JSONException, is JsonIOException, is JsonParseException, is JsonSyntaxException, is ParseException, is MalformedJsonException -> {
             AppLoge("--------数据解析错误")
             loadState.value = State(StateType.JSON)
 
         }
-        is TimeoutCancellationException ->{
+        is TimeoutCancellationException -> {
             AppLoge("--------网络连接超时")
             loadState.value = State(StateType.TIMEOUT)
         }
