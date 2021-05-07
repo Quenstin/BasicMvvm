@@ -2,11 +2,13 @@ package com.quenstin.basicmodel.view
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.blankj.utilcode.util.ToastUtils
+import com.example.basicmodel.R
 import com.quenstin.basicmodel.state.State
 import com.quenstin.basicmodel.state.StateType
 import com.quenstin.basicmodel.state.callback.*
@@ -31,7 +33,6 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     lateinit var mViewBinding: VB
 
 
-
     /**
      * 注册加载框架
      * view状态,null 错误 正常
@@ -44,17 +45,16 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     open fun reLoad() {}
 
-    /**
-     * 当前视图的布局
-     * 其实有了viewBind可以不绑定但是为了方便查看布局
-     */
-    abstract fun layoutId(): Int
-
 
     /**
      * 初始化view
      */
     abstract fun initView()
+
+    /**
+     * 事件
+     */
+    abstract fun initListener()
 
     /**
      * 初始化数据源or请求
@@ -76,6 +76,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     private fun init() {
         initViewModel()
         initView()
+        initListener()
         initData()
         initObserver()
     }
@@ -85,7 +86,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
      * 用于baseMVVMActivity
      * 如果没有继承可使用自带的拓展类 by viewModel()来获取
      */
-    open fun initViewModel(){}
+    open fun initViewModel() {}
 
 
     /**
@@ -160,6 +161,14 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
                     else -> showError(2, it.message)
                 }
             }
+        }
+    }
+
+
+    fun setTitleView(title: String) {
+        val textTitle = findViewById<TextView>(R.id.BasicViewTitle)
+        if (textTitle != null) {
+            textTitle.text = title
         }
     }
 

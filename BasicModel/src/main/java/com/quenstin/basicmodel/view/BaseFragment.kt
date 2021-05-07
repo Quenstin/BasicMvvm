@@ -48,6 +48,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
         initView()
+        initListener()
         initData()
     }
 
@@ -58,16 +59,16 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
      */
     open fun initViewModel(){}
 
-    /**
-     * 当前视图的布局
-     * 其实有了viewBind可以不绑定但是为了方便查看布局
-     */
-    abstract fun layoutId(): Int
 
     /**
      * 初始化view
      */
     abstract fun initView()
+
+    /**
+     * 事件
+     */
+    abstract fun initListener()
 
     /**
      * 初始化数据源or请求
