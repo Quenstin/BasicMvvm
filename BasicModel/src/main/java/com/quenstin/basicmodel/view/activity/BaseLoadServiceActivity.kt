@@ -1,92 +1,51 @@
-package com.quenstin.basicmodel.view
+package com.quenstin.basicmodel.view.activity
 
-import android.os.Bundle
 import android.text.TextUtils
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.viewbinding.ViewBinding
 import com.blankj.utilcode.util.ToastUtils
-import com.quenstin.basicmodel.state.State
-import com.quenstin.basicmodel.state.StateType
-import com.quenstin.basicmodel.utils.getVmClass
-import com.quenstin.basicmodel.utils.inflateBindingWithGeneric
-import com.quenstin.basicmodel.viewmodel.BaseViewModel
 import com.kingja.loadsir.callback.SuccessCallback
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
+import com.quenstin.basicmodel.state.State
+import com.quenstin.basicmodel.state.StateType
 import com.quenstin.basicmodel.state.callback.*
 
 /**
  * Created by hdyjzgq
- * data on 3/29/21
- * function is ：fragment基类
- * tip：
- *      只封装了viewBing，如果是简单页面不需要处理耦合可继承该activity
+ * data on 5/13/21
+ * function is ：提取页面状态逻辑
  */
-abstract class BaseFragment<VB : ViewBinding> : Fragment() {
-    lateinit var loadService: LoadService<*>
+ abstract class BaseLoadServiceActivity : AppCompatActivity() {
 
-    lateinit var mViewBinding: VB
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        mViewBinding = inflateBindingWithGeneric(layoutInflater)
-        loadService = LoadSir.getDefault().register(mViewBinding.root)
-        return mViewBinding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initViewModel()
-        initView()
-        initListener()
-        initData()
+    /**
+     * 注册加载框架
+     * view状态,null 错误 正常
+     */
+    private val loadService: LoadService<*> by lazy {
+        LoadSir.getDefault().register(this) {
+            reLoad()
+        }
     }
 
     /**
-     * 初始化viewModel
-     * 用于baseMVVMActivity
-     * 如果没有继承可使用自带的拓展类 by viewModel()来获取
+     * 重试请求，
+     * 需要重试逻辑可以自己重写该方法处理相关逻辑
      */
-    open fun initViewModel(){}
-
-
-    /**
-     * 初始化view
-     */
-    abstract fun initView()
-
-    /**
-     * 事件
-     */
-    abstract fun initListener()
-
-    /**
-     * 初始化数据源or请求
-     */
-    abstract fun initData()
+    open fun reLoad() {}
 
 
     /**
      * 加载中
      */
-    private fun showLoading() {
+    open fun showLoading() {
         loadService.showCallback(LoadingCallBack::class.java)
     }
 
     /**
      * 加载成功
      */
-    private fun showSuccess() {
+    open fun showSuccess() {
         loadService.showCallback(SuccessCallback::class.java)
     }
 
@@ -118,7 +77,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
      */
     open fun showTip(msg: String) {
         if (!TextUtils.isEmpty(msg)) {
-            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+            ToastUtils.showShort(msg)
         }
         loadService.showCallback(SuccessCallback::class.java)
     }
@@ -129,6 +88,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     open fun showEmpty() {
         loadService.showCallback(EmptyCallBack::class.java)
     }
+
 
     /**
      * 加载状态
@@ -149,6 +109,4 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
             }
         }
     }
-
-
 }

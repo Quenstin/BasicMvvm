@@ -1,8 +1,8 @@
 package com.quention.basicmvvm
 
+import com.quenstin.basicmodel.ext.setActivityTitle
 import com.quenstin.basicmodel.utils.AppLoge
-import com.quenstin.basicmodel.view.BaseActivity
-import com.quenstin.basicmodel.view.BaseMVVMActivity
+import com.quenstin.basicmodel.view.activity.BaseMVVMActivity
 import com.quention.basicmvvm.databinding.ActivityMainBinding
 import com.quention.basicmvvm.viewModel.TestViewModel
 
@@ -10,7 +10,7 @@ class MainActivity : BaseMVVMActivity<TestViewModel, ActivityMainBinding>() {
 
 
     override fun initView() {
-        setTitleView("测试标题")
+        setActivityTitle("测试标题")
 
     }
 

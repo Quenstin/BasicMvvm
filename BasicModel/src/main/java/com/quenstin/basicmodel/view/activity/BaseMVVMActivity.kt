@@ -1,4 +1,4 @@
-package com.quenstin.basicmodel.view
+package com.quenstin.basicmodel.view.activity
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
@@ -14,10 +14,10 @@ import com.quenstin.basicmodel.viewmodel.BaseViewModel
  *      增加了viewModel的封装
  */
 abstract class BaseMVVMActivity<VM  : BaseViewModel<*>,VB : ViewBinding>: BaseActivity<VB>() {
-
     lateinit var mViewModel: VM
 
-    override fun initViewModel() {
+
+     override fun initViewModel() {
         mViewModel = ViewModelProvider(this).get(getVmClass(this))
         mViewModel.loadState.observe(this, observer)
     }

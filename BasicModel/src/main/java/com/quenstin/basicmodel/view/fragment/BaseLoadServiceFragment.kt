@@ -1,36 +1,24 @@
-package com.quenstin.basicmodel.view
+package com.quenstin.basicmodel.view.fragment
 
-import android.os.Bundle
 import android.text.TextUtils
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.viewbinding.ViewBinding
 import com.blankj.utilcode.util.ToastUtils
-import com.example.basicmodel.R
-import com.quenstin.basicmodel.state.State
-import com.quenstin.basicmodel.state.StateType
-import com.quenstin.basicmodel.state.callback.*
-import com.quenstin.basicmodel.utils.getVmClass
-import com.quenstin.basicmodel.utils.inflateBindingWithGeneric
-import com.quenstin.basicmodel.viewmodel.BaseViewModel
 import com.kingja.loadsir.callback.SuccessCallback
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
+import com.quenstin.basicmodel.state.State
+import com.quenstin.basicmodel.state.StateType
+import com.quenstin.basicmodel.state.callback.*
 
 /**
  * Created by hdyjzgq
- * data on 3/29/21
- * function is ：activity基类
- *
- *  tip：
- *      只封装了viewBing，如果是简单页面不需要处理耦合可继承该activity
- *
- *  ps： 没有dataBing，想用dataBing不如学习Compose
+ * data on 5/14/21
+ * function is ：页面状态逻辑
  */
-abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
-    lateinit var mViewBinding: VB
+abstract class BaseLoadServiceFragment:Fragment() {
+
 
 
     /**
@@ -39,67 +27,28 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
      */
     private val loadService: LoadService<*> by lazy {
         LoadSir.getDefault().register(this) {
-            reLoad()
+            reload()
         }
     }
 
-    open fun reLoad() {}
-
-
     /**
-     * 初始化view
+     * 重试请求，
+     * 需要重试逻辑可以自己重写该方法处理相关逻辑
      */
-    abstract fun initView()
-
-    /**
-     * 事件
-     */
-    abstract fun initListener()
-
-    /**
-     * 初始化数据源or请求
-     */
-    abstract fun initData()
-
-    /**
-     * 订阅liveData
-     */
-    abstract fun initObserver()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        mViewBinding = inflateBindingWithGeneric(layoutInflater)
-        setContentView(mViewBinding.root)
-        init()
-    }
-
-    private fun init() {
-        initViewModel()
-        initView()
-        initListener()
-        initData()
-        initObserver()
-    }
-
-    /**
-     * 初始化viewModel
-     * 用于baseMVVMActivity
-     * 如果没有继承可使用自带的拓展类 by viewModel()来获取
-     */
-    open fun initViewModel() {}
+    open fun reload() {}
 
 
     /**
      * 加载中
      */
-    open fun showLoading() {
+    private fun showLoading() {
         loadService.showCallback(LoadingCallBack::class.java)
     }
 
     /**
      * 加载成功
      */
-    open fun showSuccess() {
+    private fun showSuccess() {
         loadService.showCallback(SuccessCallback::class.java)
     }
 
@@ -131,7 +80,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
      */
     open fun showTip(msg: String) {
         if (!TextUtils.isEmpty(msg)) {
-            ToastUtils.showShort(msg)
+            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
         }
         loadService.showCallback(SuccessCallback::class.java)
     }
@@ -142,7 +91,6 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     open fun showEmpty() {
         loadService.showCallback(EmptyCallBack::class.java)
     }
-
 
     /**
      * 加载状态
@@ -163,15 +111,4 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
             }
         }
     }
-
-
-    fun setTitleView(title: String) {
-        val textTitle = findViewById<TextView>(R.id.BasicViewTitle)
-        if (textTitle != null) {
-            textTitle.text = title
-        }
-    }
-
 }
-
-
