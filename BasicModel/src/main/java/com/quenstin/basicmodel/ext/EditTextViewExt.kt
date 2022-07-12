@@ -1,4 +1,4 @@
-package com.quenstin.basicmodel.ext
+package com.hdyj.basicmodel.ext
 
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,11 +15,11 @@ import android.widget.TextView
 /**
  * 优化输入框
  */
-fun EditText.afterTextChange(afterTextChanged: (String) -> Unit) {
+fun EditText.afterTextChange(changed: (String) -> Unit) {
 
     this.addTextChangedListener(object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
-            afterTextChanged.invoke(s.toString())
+            changed.invoke(s.toString())
         }
 
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -37,6 +37,13 @@ fun EditText.afterTextChange(afterTextChanged: (String) -> Unit) {
  */
 fun EditText.textString(): String {
     return this.text.toString()
+}
+
+/**
+ * 高阶函数写法
+ */
+fun EditText.test2String(content:(String)->Unit){
+    content(this.toString())
 }
 
 /**

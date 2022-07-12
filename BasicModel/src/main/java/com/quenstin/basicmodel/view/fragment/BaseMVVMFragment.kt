@@ -1,9 +1,9 @@
-package com.quenstin.basicmodel.view.fragment
+package com.hdyj.basicmodel.view.fragment
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
-import com.quenstin.basicmodel.utils.getVmClass
-import com.quenstin.basicmodel.viewmodel.BaseViewModel
+import com.hdyj.basicmodel.ext.getVmClass
+import com.hdyj.basicmodel.viewmodel.BaseViewModel
 
 /**
  * Created by hdyjzgq

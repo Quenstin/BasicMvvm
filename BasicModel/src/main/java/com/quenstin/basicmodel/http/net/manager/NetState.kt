@@ -1,4 +1,4 @@
-package com.quenstin.basicmodel.http.net.manager
+package com.hdyj.basicmodel.http.net.manager
 
 /**
  * Created by hdyjzgq

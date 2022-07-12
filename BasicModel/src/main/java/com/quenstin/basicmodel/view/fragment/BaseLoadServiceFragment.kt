@@ -1,16 +1,16 @@
-package com.quenstin.basicmodel.view.fragment
+package com.hdyj.basicmodel.view.fragment
 
 import android.text.TextUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.blankj.utilcode.util.ToastUtils
+import com.hdyj.basicmodel.http.net.manager.NetState
+import com.hdyj.basicmodel.state.State
+import com.hdyj.basicmodel.state.StateType
+import com.hdyj.basicmodel.state.callback.*
 import com.kingja.loadsir.callback.SuccessCallback
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
-import com.quenstin.basicmodel.state.State
-import com.quenstin.basicmodel.state.StateType
-import com.quenstin.basicmodel.state.callback.*
 
 /**
  * Created by hdyjzgq
@@ -26,10 +26,19 @@ abstract class BaseLoadServiceFragment:Fragment() {
      * view状态,null 错误 正常
      */
     private val loadService: LoadService<*> by lazy {
-        LoadSir.getDefault().register(this) {
+        LoadSir.getDefault().register(setLoadSirView()) {
             reload()
         }
     }
+
+
+    /**
+     * 此方法是属于亡羊补牢的措施
+     * 因为LoadSir框架加载多状态的时候传入this会全屏幕被覆盖，
+     * 按照官网来说是在baseActivity中默认加载一个带有title的布局和一个空的布局这样加载后也可以响应back
+     * 但是修改基类改动太大，所以增加这个方法默认返回this，如果是对部分布局显示多状态可以在实现类中选择性的重写改方法进行重新注入view
+     */
+    protected open fun setLoadSirView(): Any = activity as Any
 
     /**
      * 重试请求，
@@ -41,14 +50,14 @@ abstract class BaseLoadServiceFragment:Fragment() {
     /**
      * 加载中
      */
-    private fun showLoading() {
+     fun showLoading() {
         loadService.showCallback(LoadingCallBack::class.java)
     }
 
     /**
      * 加载成功
      */
-    private fun showSuccess() {
+     fun showSuccess() {
         loadService.showCallback(SuccessCallback::class.java)
     }
 
@@ -58,16 +67,17 @@ abstract class BaseLoadServiceFragment:Fragment() {
      * 1:解析异常
      * 2:其他异常
      */
-    open fun showError(state: Int, msg: String) {
-        if (msg.isNotEmpty()) {
-            ToastUtils.showShort(msg)
-        }
+    open fun showError(state:StateType) {
+
         when (state) {
-            0 -> {
+            StateType.NETWORK_ERROR -> {
                 loadService.showCallback(HttpErrorCallBack::class.java)
             }
-            1 -> {
+            StateType.JSON -> {
                 loadService.showCallback(JsonErrorCallBack::class.java)
+            }
+            StateType.TIMEOUT ->{
+                loadService.showCallback(TimeOutErrorCallBack::class.java)
             }
             else -> {
                 loadService.showCallback(ErrorCallBack::class.java)
@@ -93,6 +103,20 @@ abstract class BaseLoadServiceFragment:Fragment() {
     }
 
     /**
+     * 传参错误 404
+     */
+    open fun showHttp404Error(){
+        loadService.showCallback(Http404ErrorCallBack::class.java)
+    }
+
+    /**
+     * 无网络通知
+     */
+    open fun showHttpNotError(){
+        loadService.showCallback(NotWorkCallBack::class.java)
+    }
+
+    /**
      * 加载状态
      */
     val observer by lazy {
@@ -101,14 +125,29 @@ abstract class BaseLoadServiceFragment:Fragment() {
                 when (it.code) {
                     StateType.SUCCESS -> showSuccess()
                     StateType.LOADING -> showLoading()
-                    StateType.NETWORK_ERROR -> showError(0, "")
+                    StateType.NETWORK_ERROR -> showError(StateType.NETWORK_ERROR)
                     StateType.TIP -> showTip(it.message)
                     StateType.EMPTY -> showEmpty()
-                    StateType.JSON -> showError(1, "")
-                    StateType.TIMEOUT -> showError(2, it.message)
-                    else -> showError(2, it.message)
+                    StateType.JSON -> showError(StateType.JSON)
+                    StateType.TIMEOUT -> showError(StateType.TIMEOUT)
+                    StateType.ERROR_404 -> showHttp404Error()
+                    StateType.NET_NOT -> showHttpNotError()
+                    else -> showError(StateType.ERROR)
                 }
             }
         }
     }
+
+//    /**
+//     * 监听网络状态
+//     */
+//    val netObserver by lazy {
+//        Observer<NetState> {
+//            if (it.isSuccess){
+//                showSuccess()
+//            }else{
+//                showHttpNotError()
+//            }
+//        }
+//    }
 }

@@ -1,10 +1,10 @@
-package com.quenstin.basicmodel.viewmodel
+package com.hdyj.basicmodel.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.quenstin.basicmodel.repository.BaseRepository
-import com.quenstin.basicmodel.state.State
-import com.quenstin.basicmodel.utils.getClass
+import com.hdyj.basicmodel.repository.BaseRepository
+import com.hdyj.basicmodel.state.State
+import com.hdyj.basicmodel.ext.getClass
 
 /**
  * Created by hdyjzgq
@@ -12,6 +12,7 @@ import com.quenstin.basicmodel.utils.getClass
  * function is ：viewModel基础类
  */
 open class BaseViewModel<T : BaseRepository> : ViewModel() {
+
 
     /**
      * 页面状态

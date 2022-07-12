@@ -1,6 +1,6 @@
-package com.quenstin.basicmodel.http.net.manager
+package com.hdyj.basicmodel.http.net.manager
 
-import com.quenstin.basicmodel.http.net.livedata.EventLiveData
+import com.hdyj.basicmodel.livedata.UnPeekLiveData
 
 /**
  * Created by hdyjzgq
@@ -9,7 +9,7 @@ import com.quenstin.basicmodel.http.net.livedata.EventLiveData
  */
 class NetworkStateManager private constructor() {
 
-    val mNetworkStateCallback = EventLiveData<NetState>()
+    val mNetworkStateCallback = UnPeekLiveData<NetState>()
 
     companion object {
         val instance: NetworkStateManager by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {

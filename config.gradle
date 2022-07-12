@@ -1,19 +1,23 @@
 ext {
+
     android = [
-            compileSdkVersion: 29,
+            compileSdkVersion: 31,
             minSdkVersion    : 21,
-            targetSdkVersion : 29,
-            versionCode      : 1,
-            versionName      : "1.0.0",
-            buildToolsVersion: "29.0.3"
+            targetSdkVersion : 30,
+            versionCode      : 5,
+            versionName      : "2.0.4",
+            buildToolsVersion: "31.0.0"
     ]
 
     google = [
             "material"     : 'com.google.android.material:material:1.2.1',
             "materialalpha": 'com.google.android.material:material:1.3.0-alpha03',
+            "flexbox"      : 'com.google.android.flexbox:flexbox:3.0.0',
+
     ]
     test = [
             "junit"   : 'junit:junit:4.+',
+            "testcore": 'androidx.test:core:1.4.0-beta01',
             "extjunit": 'androidx.test.ext:junit:1.1.2',
             "espresso": 'androidx.test.espresso:espresso-core:3.3.0',
     ]
@@ -22,28 +26,33 @@ ext {
             // Kotlin
             "kotlinStdlib"            : "org.jetbrains.kotlin:kotlin-stdlib:1.4.32",
             // 协程核心库
-            "kotlinxCoroutinesCore"   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3",
+            "kotlinxCoroutinesCore"   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1",
             // 协程Android支持库
-            "kotlinxCoroutinesAndroid": "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3",
+            "kotlinxCoroutinesAndroid": "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1",
             // 协程Java8支持库
-            "kotlinxCoroutinesJdk8"   : "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.4.3"
+            "kotlinxCoroutinesJdk8"   : "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.6.1"
     ]
 
     jetpackext = [
-            "lifecycleViewmodelKtx": "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0",
-            "lifecycleRuntimeKtx"  : "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0",
-            "lifecycleLivedataKtx" : "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+            "lifecycleViewmodelKtx": "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1",
+            "lifecycleRuntimeKtx"  : "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1",
+            "lifecycleLivedataKtx" : "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1",
+            "room-runtime"         : "androidx.room:room-runtime:2.4.2",
+            "room-ktx"             : "androidx.room:room-ktx:2.4.2",
     ]
     androidx = [
             //分包
             "multidex"        : 'androidx.multidex:multidex:2.0.1',
             "constraintlayout": 'androidx.constraintlayout:constraintlayout:2.0.4',
             "cardview"        : 'androidx.cardview:cardview:1.0.0',
-            "fragmentktx"     : "androidx.fragment:fragment-ktx:1.3.0",
-            "fragment"        : "androidx.fragment:fragment:1.3.3",
-            "activity"        : "androidx.activity:activity:1.3.0-alpha07",
-            "core"            : 'androidx.core:core-ktx:1.3.2',
-            "appcompat"       : 'androidx.appcompat:appcompat:1.2.0',
+            "fragmentktx"     : "androidx.fragment:fragment-ktx:1.4.1",
+            "fragment"        : "androidx.fragment:fragment:1.4.1",
+            "activity"        : "androidx.activity:activity:1.4.0",
+            "activity-ktx"    : "androidx.activity:activity-ktx:1.4.0",
+            "core-ktx"        : 'androidx.core:core-ktx:1.7.0',
+            "core"            : 'androidx.core:core:1.7.0',
+            "appcompat"       : 'androidx.appcompat:appcompat:1.4.1',
+            "viewpager2"      : "androidx.viewpager2:viewpager2:1.0.0",
     ]
     rxjava = [
             "rxandroid": 'io.reactivex.rxjava2:rxandroid:2.1.0',
@@ -60,41 +69,97 @@ ext {
 
 
     other = [
-            //util
-            "utilcodex"                    : "com.blankj:utilcodex:1.26.0",
+            //util https://github.com/Blankj/AndroidUtilCode
+            "utilcodex"                    : "com.blankj:utilcodex:1.31.0",
 
-            //BaseAdapter
+            //BaseAdapter https://github.com/CymChad/BaseRecyclerViewAdapterHelper
             "BaseRecyclerViewAdapterHelper": 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4',
 
-            //第三方recyclerview
-            "recyclerview"                 : 'com.yanzhenjie.recyclerview:x:1.3.2',
+            //第三方recyclerview https://github.com/yanzhenjie/SwipeRecyclerView
+//            "recyclerview"                 : 'com.yanzhenjie.recyclerview:x:1.3.2',
 
-            //管理界面状态库
+            //管理界面状态库 https://github.com/KingJA/LoadSir
             loadsir                        : 'com.kingja.loadsir:loadsir:1.3.8',
-            //glide
-            "glide"                        : 'com.github.bumptech.glide:glide:4.11.0',
-            //屏幕适配
+            //图片加载 https://github.com/coil-kt/coil/
+            "coil"                         : 'io.coil-kt:coil:1.3.2',
+            //屏幕适配 https://github.com/JessYanCoding/AndroidAutoSize
             "autosize"                     : 'me.jessyan:autosize:1.2.1',
-
-            //greenDAO配置 步骤4
-            "greendao"                     : 'org.greenrobot:greendao:3.3.0',
-            // 基础依赖包，必须要依赖
+            // 基础依赖包，必须要依赖 https://github.com/gyf-dev/ImmersionBar
             "immersionbar"                 : 'com.gyf.immersionbar:immersionbar:3.0.0',
-            // fragment快速实现（可选）
+            // fragment快速实现（可选）https://github.com/gyf-dev/ImmersionBar
             "immersionbar-components"      : 'com.gyf.immersionbar:immersionbar-components:3.0.0',
-            // kotlin扩展（可选）
+            // kotlin扩展（可选）https://github.com/gyf-dev/ImmersionBar
             "immersionbarktx"              : 'com.gyf.immersionbar:immersionbar-ktx:3.0.0',
-
+            //popwindow https://github.com/pinguo-zhouwei/CustomPopwindow
             "zhouweilibrary"               : 'com.example.zhouwei.library:library:1.0.0',
-            "eventbus"                     : 'org.greenrobot:eventbus:3.2.0',
+
+            //html解析 https://jsoup.org
+            "jsoup"                        : 'org.jsoup:jsoup:1.9.2',
+            //日志工具 https://github.com/orhanobut/logger
             "logger"                       : 'com.orhanobut:logger:2.2.0',
-            "圆图"                           : 'de.hdodenhof:circleimageview:3.1.0',
+            //EditText扩展 https://github.com/woxingxiao/XEditText
+//            "XEditText"                    : 'com.xw.repo:xedittext:2.3.0',
+            //应用更新 https://github.com/xuexiangjys/XUpdate
+            "XUpdate"                      : "com.github.xuexiangjys:XUpdate:2.0.2",
+            //OKHttp扩展 https://github.com/hongyangAndroid/okhttputils
+            "OKHttpUtils"                  : 'com.zhy:okhttputils:2.6.2',
+            //mp3播放 https://github.com/EspoirX/StarrySky/
+//            "StarrySky"                    : "com.github.EspoirX:StarrySky:v2.6.3",
+            //歌词 https://github.com/bifan-wei/LrcView
+//            "LrcView"                      : "com.github.bifan-wei:LrcView:V1.4",
+
+            //路由 https://github.com/alibaba/ARouter
             "arouter"                      : 'com.alibaba:arouter-api:1.5.1',
+            //权限申请 https://github.com/guolindev/PermissionX
+            "permissionx"                  : 'com.permissionx.guolindev:permissionx:1.4.0',
 
-    ]
+            //指示器 https://github.com/hackware1993/MagicIndicator
+//            "MagicIndicator"               : 'com.github.hackware1993:MagicIndicator:1.7.0',
+            //x5web https://github.com/Quenstin/YCWebView
+//            "YCWebView"                    : 'com.github.Quenstin:YCWebView:1.5.4',
 
-    apt = [
-            Glidecompile   : "com.github.bumptech.glide:compiler:4.11.0",
+            //tab布局 https://github.com/H07000223/FlycoTabLayout
+            //https://github.com/li-xiaojun/FlycoTabLayout
+//            "TabLayout"                    : 'com.github.li-xiaojun:FlycoTabLayout:2.0.6',
+            //动画库 https://github.com/airbnb/lottie-android
+            "lottie"                       : "com.airbnb.android:lottie:4.1.0",
+            //下载 https://github.com/lingochamp/filedownloader
+            "Filedownloader"               : "com.liulishuo.filedownloader:library:1.7.5",
+            "okhttp3-connection"           : "cn.dreamtobe.filedownloader:filedownloader-okhttp3-connection:1.1.0",
+            //角标 https://github.com/qstumn/BadgeView
+//            "badgeview"                    : 'q.rorbin:badgeview:1.1.3',
+
+//            "leakcanary_debug"             : 'com.squareup.leakcanary:leakcanary-android:2.7',
+            //相机相册 https://github.com/yanzhenjie/Album
+//            "album"                        : 'com.yanzhenjie:album:2.1.3',
+            //可缩放的图片 https://github.com/Baseflow/PhotoView
+//            "PhotoView"                    : 'com.github.chrisbanes:PhotoView:2.2.0',
+            //录音波动动画 https://github.com/xfans/VoiceWaveView
+//            "VoiceWaveView"                : 'com.github.xfans:VoiceWaveView:1.0.2',
+            //富文本展示 https://github.com/zrunker/ZRichText
+//            "AutoScrollerTextView"         : 'com.github.zrunker:ZTextView:v1.0.2',
+            //图片样式 https://github.com/vinc3m1/RoundedImageView
+//            "RoundedImageView"             : 'com.makeramen:roundedimageview:2.3.0',
+            //日历控件  https://github.com/huanghaibin-dev/CalendarView
+//            "calendarview"                 : 'com.haibin:calendarview:3.7.1',
+            //时间弹框  https://github.com/gzu-liyujiang/AndroidPicker
+//            "WheelPicker"                  : 'com.github.gzu-liyujiang.AndroidPicker:WheelPicker:4.1.6',
+            //PDF视图 https://github.com/barteksc/AndroidPdfViewer
+//            "PDFViewer"                    : "com.github.barteksc:android-pdf-viewer:2.8.2",
+            //app出现crash的处理 https://github.com/android-notes/Cockroach
+            "cockroach"                    : "com.github.Quenstin:Cockroach:2.0.0",
+            //流布局 https://github.com/hongyangAndroid/FlowLayout
+//            "flowlayout"                   : "com.hyman:flowlayout-lib:1.1.2",
+            //格式化输入样式 https://github.com/dkzwm/FormatEditText
+//            "FormattedEditText"            : "com.github.dkzwm:fet-core:0.2.1",
+            //大图加载 https://github.com/davemorrissey/ssiv-kotlin-sample
+//            "SubsamplingScale ImageView"   : 'com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0',
+            //刷新,加载  https://github.com/scwang90/SmartRefreshLayout
+            "refresh-layout-kernel"        : "io.github.scwang90:refresh-layout-kernel:2.0.5",//核心依赖
+            "refresh-header-classics"      : "io.github.scwang90:refresh-header-classics:2.0.5",  //经典刷新
+            "refresh-footer-classics"      : "io.github.scwang90:refresh-footer-classics:2.0.5",  //经典加载
+            //图片剪裁  https://github.com/Yalantis/uCrop
+//            "uCrop"                        : "com.github.yalantis:ucrop:2.2.8"
     ]
 
     google_library = google.values()
@@ -102,9 +167,8 @@ ext {
     rxjava_library = rxjava.values()
     otherLibs = other.values()
     http_library = http.values()
-    annotationProcessorLibs = apt.values()
     coroutinesLib = coroutines.values()
     jetpackextLib = jetpackext.values()
-    app_library = [google_library, androidx_library, http_library, otherLibs, annotationProcessorLibs, jetpackextLib]
+    app_library = [google_library, androidx_library, http_library, otherLibs, jetpackextLib]
 
 }

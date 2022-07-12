@@ -1,4 +1,4 @@
-package com.quenstin.basicmodel.http.net.interceptor
+package com.hdyj.basicmodel.http.net.interceptor
 
 import java.io.*
 import java.nio.charset.Charset

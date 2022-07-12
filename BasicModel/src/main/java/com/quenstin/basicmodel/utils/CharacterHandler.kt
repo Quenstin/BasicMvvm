@@ -1,4 +1,4 @@
-package com.quenstin.basicmodel.utils
+package com.hdyj.basicmodel.utils
 
 import android.text.InputFilter
 import android.text.Spanned
@@ -15,6 +15,7 @@ import javax.xml.transform.TransformerException
 import javax.xml.transform.TransformerFactory
 import javax.xml.transform.stream.StreamResult
 import javax.xml.transform.stream.StreamSource
+import kotlin.experimental.and
 
 /**
  * Created by hdyjzgq

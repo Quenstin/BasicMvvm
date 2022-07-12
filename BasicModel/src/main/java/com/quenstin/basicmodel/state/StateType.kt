@@ -1,4 +1,4 @@
-package com.quenstin.basicmodel.state
+package com.hdyj.basicmodel.state
 
 /**
  * Created by hdyjzgq
@@ -13,6 +13,8 @@ enum class StateType {
     LOADING,
     TIP,
     JSON,
-    TIMEOUT
+    TIMEOUT,
+    ERROR_404,
+    NET_NOT
 
 }

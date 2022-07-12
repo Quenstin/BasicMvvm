@@ -1,10 +1,10 @@
-package com.quenstin.basicmodel.view.activity
+package com.hdyj.basicmodel.view.activity
 
-import android.content.Context
 import android.os.Bundle
 import androidx.viewbinding.ViewBinding
-import com.quenstin.basicmodel.ext.initBar
-import com.quenstin.basicmodel.utils.inflateBindingWithGeneric
+import com.hdyj.basicmodel.ext.inflateBindingWithGeneric
+import com.hdyj.basicmodel.ext.initBar
+
 
 /**
  * Created by hdyjzgq
@@ -19,22 +19,21 @@ import com.quenstin.basicmodel.utils.inflateBindingWithGeneric
 abstract class BaseActivity<VB : ViewBinding> : BaseLoadServiceActivity() {
 
     lateinit var mViewBinding: VB
-    lateinit var mContext: Context
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mContext=this
-        mViewBinding = inflateBindingWithGeneric(layoutInflater)
         initWindow()
+        mViewBinding = inflateBindingWithGeneric(layoutInflater)
         setContentView(mViewBinding.root)
         init()
     }
 
     private fun init() {
         initViewModel()
-        initBar()
+        if (isInitBar()) {
+            initBar()
+        }
         initView()
         initData()
         initListener()
@@ -70,13 +69,24 @@ abstract class BaseActivity<VB : ViewBinding> : BaseLoadServiceActivity() {
      * 用于baseMVVMActivity
      * 如果没有继承可使用自带的拓展类 by viewModel()来获取
      */
-    open fun initViewModel() {}
+    open fun initViewModel() {
+//        NetworkStateManager.instance.mNetworkStateCallback.observe(this, netObserver)
+
+    }
 
 
     /**
      * 需要设置window参数可重写此方法
      */
     open fun initWindow() {}
+
+
+    /**
+     * 是否需要设置公用的immersionBar
+     * 默认返回true
+     * 如果需要自己设置返回false
+     */
+    protected open fun isInitBar(): Boolean = true
 
 
 }

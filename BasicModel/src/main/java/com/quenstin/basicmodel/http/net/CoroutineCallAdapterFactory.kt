@@ -1,12 +1,11 @@
-package com.quenstin.basicmodel.http.net
-
-import retrofit2.CallAdapter
+package com.hdyj.basicmodel.http.net
 
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred
 import retrofit2.*
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
+
 /**
  * Created by hdyjzgq
  * data on 4/12/21

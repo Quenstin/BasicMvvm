@@ -1,4 +1,4 @@
-package com.quenstin.basicmodel.view.fragment
+package com.hdyj.basicmodel.view.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
-import com.quenstin.basicmodel.utils.inflateBindingWithGeneric
+import com.hdyj.basicmodel.ext.inflateBindingWithGeneric
 
 /**
  * Created by hdyjzgq
@@ -18,11 +18,10 @@ import com.quenstin.basicmodel.utils.inflateBindingWithGeneric
 abstract class BaseFragment<VB : ViewBinding> : BaseLoadServiceFragment() {
 
     lateinit var mViewBinding: VB
-   lateinit  var mContext:Context
-
+    lateinit var mContext: Context
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        mContext=context
+        mContext = context
     }
 
 
@@ -31,7 +30,7 @@ abstract class BaseFragment<VB : ViewBinding> : BaseLoadServiceFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mViewBinding=inflateBindingWithGeneric(layoutInflater,container,false)
+        mViewBinding = inflateBindingWithGeneric(layoutInflater, container, false)
         return mViewBinding.root
     }
 
@@ -41,6 +40,7 @@ abstract class BaseFragment<VB : ViewBinding> : BaseLoadServiceFragment() {
         setListener()
         initView()
         initData()
+        initObserver()
     }
 
     /**
@@ -48,7 +48,10 @@ abstract class BaseFragment<VB : ViewBinding> : BaseLoadServiceFragment() {
      * 用于baseMVVMActivity
      * 如果没有继承可使用自带的拓展类 by viewModel()来获取
      */
-    open fun initViewModel() {}
+    open fun initViewModel() {
+//        NetworkStateManager.instance.mNetworkStateCallback.observe(viewLifecycleOwner,netObserver)
+
+    }
 
 
     /**
@@ -59,14 +62,17 @@ abstract class BaseFragment<VB : ViewBinding> : BaseLoadServiceFragment() {
     /**
      * 初始化监听
      */
-    open fun setListener(){}
+    open fun setListener() {}
 
     /**
      * 初始化数据源or请求
      */
     abstract fun initData()
 
-
+    /**
+     * 订阅liveData
+     */
+    open fun initObserver() {}
 
 
 

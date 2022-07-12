@@ -1,4 +1,4 @@
-package com.quenstin.basicmodel.http.net.manager
+package com.hdyj.basicmodel.http.net.manager
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -16,7 +16,7 @@ class NetworkStateReceive : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == ConnectivityManager.CONNECTIVITY_ACTION) {
             if(!isInit){
-                if (!NetworkUtils.isAvailable()) {
+                if (!isNetworkAvailable(context)) {
                     //收到没有网络时判断之前的值是不是有网络，如果有网络才提示通知 ，防止重复通知
                     NetworkStateManager.instance.mNetworkStateCallback.value?.let {
                         if(it.isSuccess){
@@ -40,5 +40,13 @@ class NetworkStateReceive : BroadcastReceiver() {
             }
             isInit = false
         }
+    }
+
+    fun isNetworkAvailable(context: Context): Boolean {
+        val manager = context.applicationContext.getSystemService(
+            Context.CONNECTIVITY_SERVICE
+        ) as ConnectivityManager ?: return false
+        val info = manager.activeNetworkInfo
+        return null != info && info.isAvailable
     }
 }

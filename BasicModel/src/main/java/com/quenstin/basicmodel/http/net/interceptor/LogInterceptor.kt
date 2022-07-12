@@ -1,10 +1,10 @@
-package com.quenstin.basicmodel.http.net.interceptor
+package com.hdyj.basicmodel.http.net.interceptor
 
-import com.quenstin.basicmodel.http.net.interceptor.ZipHelper.Companion.decompressForGzip
-import com.quenstin.basicmodel.http.net.interceptor.ZipHelper.Companion.decompressToStringForZlib
-import com.quenstin.basicmodel.utils.AppLoge
-import com.quenstin.basicmodel.utils.CharacterHandler.Companion.jsonFormat
-import com.quenstin.basicmodel.utils.UrlEncoderUtils.Companion.hasUrlEncoded
+import com.hdyj.basicmodel.http.net.interceptor.ZipHelper.Companion.decompressForGzip
+import com.hdyj.basicmodel.http.net.interceptor.ZipHelper.Companion.decompressToStringForZlib
+import com.hdyj.basicmodel.utils.CharacterHandler.Companion.jsonFormat
+import com.hdyj.basicmodel.utils.UrlEncoderUtils.Companion.hasUrlEncoded
+import com.hdyj.basicmodel.utils.hdyjLoge
 import okhttp3.*
 import okio.Buffer
 import java.io.IOException
@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit
  * function is ：log拦截器
  */
 class LogInterceptor : Interceptor {
-    private val printLevel = Level.ALL
+    private val printLevel = Level.NONE
 
     constructor() {}
 
@@ -34,16 +34,11 @@ class LogInterceptor : Interceptor {
         val logRequest =
             printLevel == Level.ALL || printLevel != Level.NONE && printLevel == Level.REQUEST
         if (logRequest) {
-            //打印请求信息
-            if (request.body() != null && isParseable(
-                    request.body()!!.contentType()
-                )
-            ) {
-                AppLoge("请求信息-->  ${parseParams(request)}")
-            } else {
-                AppLoge("请求信息-->  ${parseParams(request)}")
+            hdyjLoge(
+                "请求地址--->  ${request.url()} \n" +
+                        " method--->  ${request.method()} \n 请求body-->  ${parseParams(request)}"
+            )
 
-            }
         }
         val logResponse =
             printLevel == Level.ALL || printLevel != Level.NONE && printLevel == Level.RESPONSE
@@ -52,7 +47,7 @@ class LogInterceptor : Interceptor {
             chain.proceed(request)
         } catch (e: Exception) {
             e.message?.let {
-                AppLoge("Http Error: $it")
+                hdyjLoge("Http Error: $it---${request.url()}")
 
             }
             throw e
@@ -63,7 +58,8 @@ class LogInterceptor : Interceptor {
         //打印响应结果
         var bodyString: String? = null
         if (responseBody != null && isParseable(responseBody.contentType())) {
-            bodyString = printResult(request, originalResponse, logResponse)
+            //此处会导致OOM，请谨慎打开！！！！！
+//            bodyString = printResult(request, originalResponse, logResponse)
         }
         if (logResponse) {
             val segmentList =
@@ -78,13 +74,13 @@ class LogInterceptor : Interceptor {
             val message = originalResponse.message()
             val url = originalResponse.request().url().toString()
             if (responseBody != null && isParseable(responseBody.contentType())) {
-                AppLoge("请求地址--->  $url \n状态码--->  $code")
-                AppLoge("请求时长--->  ${TimeUnit.NANOSECONDS.toMillis(t2 - t1)}ms")
-                AppLoge("请求结果--->  $bodyString")
+                hdyjLoge("请求地址--->  $url \n状态码--->  $code")
+                hdyjLoge("请求时长--->  ${TimeUnit.NANOSECONDS.toMillis(t2 - t1)}ms")
+                hdyjLoge("请求结果--->  $bodyString")
 
             } else {
-                AppLoge("请求地址--->  $url-->状态码--->  $code")
-                AppLoge("请求结果--->  $message--->  $bodyString")
+                hdyjLoge("请求地址--->  $url-->状态码--->  $code")
+                hdyjLoge("请求结果--->  $message--->  $bodyString")
 
             }
         }
@@ -208,13 +204,13 @@ class LogInterceptor : Interceptor {
                     charset = contentType.charset(charset)
                 }
                 var json = requestbuffer.readString(charset)
-                if (hasUrlEncoded(json!!)) {
+                if (hasUrlEncoded(json)) {
                     json = URLDecoder.decode(
                         json,
                         convertCharset(charset)
                     )
                 }
-                jsonFormat(json!!)
+                jsonFormat(json)
             } catch (e: IOException) {
                 e.printStackTrace()
                 "{\"error\": \"" + e.message + "\"}"
