@@ -1,15 +1,15 @@
-package com.hdyj.basicmodel.view.activity
+package com.quenstin.basicmodel.view.activity
 
 import android.text.TextUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.hdyj.basicmodel.ext.toastShow
-import com.hdyj.basicmodel.state.State
-import com.hdyj.basicmodel.state.StateType
-import com.hdyj.basicmodel.state.callback.*
+import com.quenstin.basicmodel.ext.toastShow
+import com.quenstin.basicmodel.state.State
+import com.quenstin.basicmodel.state.StateType
 import com.kingja.loadsir.callback.SuccessCallback
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
+import com.quenstin.basicmodel.state.callback.*
 
 /**
  * Created by hdyjzgq

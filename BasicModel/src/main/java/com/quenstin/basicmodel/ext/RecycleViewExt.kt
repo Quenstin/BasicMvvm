@@ -1,4 +1,4 @@
-package com.hdyj.basicmodel.ext
+package com.quenstin.basicmodel.ext
 
 import androidx.recyclerview.widget.RecyclerView
 

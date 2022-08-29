@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.hdyj.basicmodel.http.net.manager
+package com.quenstin.basicmodel.http.net.manager
 
 import androidx.annotation.NonNull
-import com.hdyj.basicmodel.http.RetrofitFactory
 import com.xuexiang.xupdate.proxy.IUpdateHttpService
 import com.xuexiang.xupdate.utils.UpdateUtils
 import com.zhy.http.okhttp.OkHttpUtils
@@ -25,7 +24,6 @@ import com.zhy.http.okhttp.callback.StringCallback
 import com.zhy.http.okhttp.request.RequestCall
 import okhttp3.*
 import java.io.File
-import java.io.IOException
 import java.util.*
 
 

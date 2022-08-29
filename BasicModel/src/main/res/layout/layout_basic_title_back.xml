@@ -3,29 +3,82 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/basicTitleRoot"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="@dimen/dp_60"
     android:background="@color/white">
 
-    <ImageView
+    <View
         android:id="@+id/basicTitleBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:src="@mipmap/back64"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/basicBackIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:src="@mipmap/fanhui"
+        app:layout_constraintBottom_toBottomOf="@+id/basicTextTitle"
+        app:layout_constraintStart_toStartOf="@+id/basicTitleBack"
+        app:layout_constraintTop_toTopOf="@+id/basicTextTitle" />
 
     <TextView
         android:id="@+id/basicTextTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/text_333333"
-        android:textSize="16sp"
+        android:layout_marginStart="90dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginBottom="@dimen/dp_13"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text=""
+        android:textColor="@color/text_222222"
+        android:textSize="@dimen/text_16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/baseSearchIV"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginRight="@dimen/dp_40"
+        android:paddingLeft="@dimen/dp_5"
+        android:paddingTop="@dimen/dp_5"
+        android:paddingRight="@dimen/dp_5"
+        android:src="@mipmap/search"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/basicTextTitle"
+        app:layout_constraintRight_toRightOf="@+id/rightBg"
+        app:layout_goneMarginRight="61dp" />
+
+    <View
+        android:id="@+id/rightBg"
+        android:layout_width="30dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:background="@mipmap/right_bg"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/basicTextTitle"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/basicTextTitle" />
+
+
+    <ImageView
+        android:id="@+id/basicClose"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:src="@mipmap/icon_close"
+        app:layout_constraintBottom_toBottomOf="@+id/rightBg"
+        app:layout_constraintEnd_toEndOf="@+id/rightBg"
+        app:layout_constraintStart_toStartOf="@+id/rightBg"
+        app:layout_constraintTop_toTopOf="@+id/rightBg" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

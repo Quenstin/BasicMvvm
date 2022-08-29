@@ -1,7 +1,7 @@
-package com.hdyj.basicmodel.utils.zip
+package com.quenstin.basicmodel.utils.zip
 
-import com.hdyj.basicmodel.utils.zip.ZipListener
-import com.hdyj.basicmodel.utils.zip.UnZipMainThread
+import com.quenstin.basicmodel.utils.zip.UnZipMainThread
+import com.quenstin.basicmodel.utils.zip.ZipListener
 
 /**
  * Created by hdyjzgq

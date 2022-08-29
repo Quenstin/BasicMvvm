@@ -1,46 +1,43 @@
-package com.quenstin.basicmodel.livedata;
+package com.quenstin.basicmodel.livedata
 
-import androidx.annotation.NonNull;
-import androidx.arch.core.internal.SafeIterableMap;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import java.lang.reflect.Field;
-import java.util.Map;
+import androidx.lifecycle.LiveData
+import androidx.arch.core.internal.SafeIterableMap
+import androidx.lifecycle.Observer
+
 /**
  * Created by hdyjzgq
  * data on 6/9/21
  * function is ：
  */
-public class LiveDataUtil {
+object LiveDataUtil {
     /**
      * 通过反射，获取指定LiveData中的Observer对象
      *
      * @param liveData 指定的LiveData
-     * @param identityHashCode 想要获取的Observer对象的identityHashCode {@code System.identityHashCode}
+     * @param identityHashCode 想要获取的Observer对象的identityHashCode `System.identityHashCode`
      * @return
      */
-    public static Observer getObserver(@NonNull LiveData liveData, @NonNull Integer identityHashCode) {
+    @JvmStatic
+    fun getObserver(liveData: LiveData<*>, identityHashCode: Int): Observer<*>? {
         if (liveData == null || identityHashCode == null) {
-            return null;
+            return null
         }
-
         try {
-            Field field = LiveData.class.getDeclaredField("mObservers");
-            field.setAccessible(true);
-            SafeIterableMap<Observer, Object> observers = (SafeIterableMap<Observer, Object>) field.get(liveData);
+            val field = LiveData::class.java.getDeclaredField("mObservers")
+            field.isAccessible = true
+            val observers = field[liveData] as SafeIterableMap<Observer<*>, Any>
             if (observers != null) {
-                for (Map.Entry<Observer, Object> entry : observers) {
-                    Observer observer = entry.getKey();
+                for ((observer) in observers) {
                     if (System.identityHashCode(observer) == identityHashCode) {
-                        return observer;
+                        return observer
                     }
                 }
             }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+        } catch (e: IllegalAccessException) {
+            e.printStackTrace()
+        } catch (e: NoSuchFieldException) {
+            e.printStackTrace()
         }
-        return null;
+        return null
     }
 }

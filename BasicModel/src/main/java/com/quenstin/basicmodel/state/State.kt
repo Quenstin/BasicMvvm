@@ -1,4 +1,4 @@
-package com.hdyj.basicmodel.state
+package com.quenstin.basicmodel.state
 
 import androidx.annotation.StringRes
 

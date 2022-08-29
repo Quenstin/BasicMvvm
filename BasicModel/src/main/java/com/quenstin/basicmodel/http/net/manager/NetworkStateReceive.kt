@@ -4,7 +4,8 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
-import com.blankj.utilcode.util.NetworkUtils
+import com.quenstin.basicmodel.http.net.manager.NetState
+import com.quenstin.basicmodel.http.net.manager.NetworkStateManager
 
 /**
  * Created by hdyjzgq

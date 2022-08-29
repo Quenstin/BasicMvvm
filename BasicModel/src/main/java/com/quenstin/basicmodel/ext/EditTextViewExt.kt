@@ -1,4 +1,4 @@
-package com.hdyj.basicmodel.ext
+package com.quenstin.basicmodel.ext
 
 import android.text.Editable
 import android.text.TextWatcher

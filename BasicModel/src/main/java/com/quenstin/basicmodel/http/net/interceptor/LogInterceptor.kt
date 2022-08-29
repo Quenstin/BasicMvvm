@@ -1,10 +1,10 @@
-package com.hdyj.basicmodel.http.net.interceptor
+package com.quenstin.basicmodel.http.net.interceptor
 
-import com.hdyj.basicmodel.http.net.interceptor.ZipHelper.Companion.decompressForGzip
-import com.hdyj.basicmodel.http.net.interceptor.ZipHelper.Companion.decompressToStringForZlib
-import com.hdyj.basicmodel.utils.CharacterHandler.Companion.jsonFormat
-import com.hdyj.basicmodel.utils.UrlEncoderUtils.Companion.hasUrlEncoded
-import com.hdyj.basicmodel.utils.hdyjLoge
+import com.quenstin.basicmodel.http.net.interceptor.ZipHelper.Companion.decompressForGzip
+import com.quenstin.basicmodel.http.net.interceptor.ZipHelper.Companion.decompressToStringForZlib
+import com.quenstin.basicmodel.utils.CharacterHandler.Companion.jsonFormat
+import com.quenstin.basicmodel.utils.UrlEncoderUtils.Companion.hasUrlEncoded
+import com.quenstin.basicmodel.utils.hdyjLoge
 import okhttp3.*
 import okio.Buffer
 import java.io.IOException

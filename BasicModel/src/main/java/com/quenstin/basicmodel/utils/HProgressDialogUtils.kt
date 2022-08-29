@@ -1,8 +1,8 @@
-package com.hdyj.basicmodel.utils
+package com.quenstin.basicmodel.utils
 
 import android.content.Context
-import com.hdyj.basicmodel.ext.showDialog
-import com.hdyj.basicmodel.widget.dialog.HProgressDialog
+import com.quenstin.basicmodel.ext.showDialog
+import com.quenstin.basicmodel.widget.dialog.HProgressDialog
 
 
 /**

@@ -1,11 +1,11 @@
-package com.hdyj.basicmodel.http
+package com.quenstin.basicmodel.http
 
 import com.blankj.utilcode.util.SPUtils
-import com.hdyj.basicmodel.common.BasicCommon
-import com.hdyj.basicmodel.http.net.CoroutineCallAdapterFactory
-import com.hdyj.basicmodel.http.net.interceptor.CacheInterceptor
-import com.hdyj.basicmodel.http.net.interceptor.LogInterceptor
-import com.hdyj.basicmodel.http.net.manager.NullHostNameVerifier
+import com.quenstin.basicmodel.common.BasicCommon
+import com.quenstin.basicmodel.http.net.CoroutineCallAdapterFactory
+import com.quenstin.basicmodel.http.net.interceptor.CacheInterceptor
+import com.quenstin.basicmodel.http.net.interceptor.LogInterceptor
+import com.quenstin.basicmodel.http.net.manager.NullHostNameVerifier
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -41,6 +41,7 @@ class RetrofitFactory private constructor() {
     }
 
     companion object {
+        var mBaseUrl = "https://www.baidu.com"
         val instance by lazy {
             RetrofitFactory()
         }

@@ -1,9 +1,8 @@
-package com.hdyj.basicmodel.utils
+package com.quenstin.basicmodel.utils
 
 import android.content.Context
 import android.os.Build
 import android.provider.Settings
-import android.util.Log
 import com.blankj.utilcode.util.EncryptUtils
 
 

@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="CommitDialog" parent="Animation.AppCompat.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item><!--半透明-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+    </style>
+
     <style name="LoadingIndicatorView">
         <item name="minWidth">48dip</item>
         <item name="maxWidth">48dip</item>
         <item name="minHeight">48dip</item>
         <item name="maxHeight">48dip</item>
-        <item name="indicatorName">BallSpinFadeLoaderIndicator</item>
     </style>
 
     <style name="LoadingIndicatorView.Large">
@@ -14,7 +22,6 @@
         <item name="maxWidth">76dip</item>
         <item name="minHeight">76dip</item>
         <item name="maxHeight">76dip</item>
-        <item name="indicatorName">BallSpinFadeLoaderIndicator</item>
     </style>
 
     <style name="LoadingIndicatorView.Small">
@@ -22,6 +29,41 @@
         <item name="maxWidth">24dip</item>
         <item name="minHeight">24dip</item>
         <item name="maxHeight">24dip</item>
-        <item name="indicatorName">BallSpinFadeLoaderIndicator</item>
+    </style>
+
+    <style name="AnimCenter" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_center_in</item>
+        <item name="android:windowExitAnimation">@anim/push_center_out</item>
+    </style>
+    <style name="AnimBottom2Top" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
+    <style name="AnimTop2Bottom" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_out</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_in</item>
+    </style>
+    <style name="DialogNoTranslucent" parent="Animation.AppCompat.Dialog">
+        <!-- 是否有边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!--是否在悬浮Activity之上  -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!--阴影  -->
+        <item name="android:windowIsTranslucent">true</item><!--半透明-->
+        <!--背景透明-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+
+    <style name="bottom_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <!--//退出时的动画-->
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
     </style>
 </resources>

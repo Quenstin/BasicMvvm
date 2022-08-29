@@ -1,4 +1,4 @@
-package com.hdyj.basicmodel.http.net.interceptor
+package com.quenstin.basicmodel.http.net.interceptor
 
 import com.blankj.utilcode.util.NetworkUtils
 import okhttp3.CacheControl

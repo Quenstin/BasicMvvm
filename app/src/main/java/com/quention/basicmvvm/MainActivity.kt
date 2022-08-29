@@ -20,12 +20,7 @@ class MainActivity : BaseMVVMActivity<TestViewModel, ActivityMainBinding>() {
     }
 
     override fun initObserver() {
-        mViewModel.data.observe(this, { t ->
-            t?.let {
-                mViewBinding.testTv.text = it.toString()
-                AppLoge(it.toString())
-            }
-        })
+
     }
 
     override fun initListener() {

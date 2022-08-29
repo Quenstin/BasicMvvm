@@ -1,4 +1,4 @@
-package com.hdyj.basicmodel.ext
+package com.quenstin.basicmodel.ext
 
 import android.os.Build
 import android.view.View
@@ -13,8 +13,8 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.example.basicmodel.R
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
-import com.hdyj.basicmodel.view.activity.BaseActivity
-import com.hdyj.basicmodel.widget.ToastCustom
+import com.quenstin.basicmodel.view.activity.BaseActivity
+import com.quenstin.basicmodel.widget.ToastCustom
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

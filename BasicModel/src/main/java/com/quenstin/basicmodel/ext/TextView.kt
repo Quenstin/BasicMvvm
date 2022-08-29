@@ -1,4 +1,4 @@
-package com.hdyj.basicmodel.ext
+package com.quenstin.basicmodel.ext
 
 import android.graphics.Paint
 import android.widget.TextView

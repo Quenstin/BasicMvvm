@@ -1,4 +1,4 @@
-package com.hdyj.basicmodel.data
+package com.quenstin.basicmodel.data
 
 /**
  * Created by hdyjzgq

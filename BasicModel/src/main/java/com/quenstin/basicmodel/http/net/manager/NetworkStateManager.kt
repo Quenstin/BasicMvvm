@@ -1,6 +1,7 @@
-package com.hdyj.basicmodel.http.net.manager
+package com.quenstin.basicmodel.http.net.manager
 
-import com.hdyj.basicmodel.livedata.UnPeekLiveData
+import com.quenstin.basicmodel.livedata.UnPeekLiveData
+
 
 /**
  * Created by hdyjzgq

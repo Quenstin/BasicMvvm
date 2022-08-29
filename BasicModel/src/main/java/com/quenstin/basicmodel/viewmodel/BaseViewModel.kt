@@ -1,10 +1,10 @@
-package com.hdyj.basicmodel.viewmodel
+package com.quenstin.basicmodel.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.hdyj.basicmodel.repository.BaseRepository
-import com.hdyj.basicmodel.state.State
-import com.hdyj.basicmodel.ext.getClass
+import com.quenstin.basicmodel.repository.BaseRepository
+import com.quenstin.basicmodel.state.State
+import com.quenstin.basicmodel.ext.getClass
 
 /**
  * Created by hdyjzgq

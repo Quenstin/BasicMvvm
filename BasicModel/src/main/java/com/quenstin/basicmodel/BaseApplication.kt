@@ -1,19 +1,16 @@
-package com.hdyj.basicmodel
+package com.quenstin.basicmodel
 
 import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
-import com.blankj.utilcode.util.AppUtils
 import com.example.basicmodel.BuildConfig
-import com.hdyj.basicmodel.http.net.manager.OKHttpUpdateHttpService
-import com.hdyj.basicmodel.state.callback.*
-import com.hdyj.basicmodel.utils.DownloadUtils
-import com.hdyj.basicmodel.utils.hdyjLogd
-import com.hdyj.basicmodel.utils.toastShow
+import com.quenstin.basicmodel.utils.DownloadUtils
+import com.quenstin.basicmodel.utils.hdyjLogd
 import com.kingja.loadsir.core.LoadSir
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.FormatStrategy
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
+import com.quenstin.basicmodel.state.callback.*
 
 
 /**

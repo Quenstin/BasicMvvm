@@ -1,4 +1,4 @@
-package com.hdyj.basicmodel.common
+package com.quenstin.basicmodel.common
 
 /**
  * Created by hdyjzgq
@@ -18,23 +18,4 @@ object BasicCommon {
 
 
 
-     /**
-      * 是否激活
-      */
-     const val ACTIVE = "active"
-
-     /**
-     * 护眼模式  是否开启
-      */
-     const val  isProtection= "isProtection"
-
-     /**
-      * 护眼模式   设置时长  0:每隔5分钟   1:每隔30分钟   2:每隔1小时  3:每隔2小时  4:每隔3小时  5:每隔4小时
-      */
-     const val SettingTimeType = "SettingTimeType"
-
-     /**
-      * 护眼模式, 统计运行时长
-      */
-     const val appUseTime = "APP_USE_TIME"
 }

@@ -1,4 +1,4 @@
-package com.hdyj.basicmodel.bus
+package com.quenstin.basicmodel.bus
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData

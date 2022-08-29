@@ -1,8 +1,7 @@
-package com.hdyj.basicmodel.http.net.manager
+package com.quenstin.basicmodel.http.net.manager
 
 import android.annotation.SuppressLint
-import android.util.Log
-import com.hdyj.basicmodel.utils.hdyjLogi
+import com.quenstin.basicmodel.utils.hdyjLogi
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import javax.net.ssl.*

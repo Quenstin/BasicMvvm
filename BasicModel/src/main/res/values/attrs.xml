@@ -10,4 +10,19 @@
         <attr name="indicatorColor" format="color"/>
     </declare-styleable>
 
+    <declare-styleable name="SettingItem">
+        <!--        左侧图标-->
+        <attr name="itemicon" format="reference"></attr>
+        <!--        item左侧标题-->
+        <attr name="itemname" format="string"></attr>
+        <!--        item右侧内容-->
+        <attr name="itemvalue" format="string"></attr>
+        <!--        左侧图标是否为圆型-->
+        <attr name="isCircleIcon" format="boolean"></attr>
+        <!--        是否有灰色分割线-->
+        <attr name="showLine" format="boolean"></attr>
+        <!--        是否隐藏图片-->
+        <attr name="isSrcShow" format="boolean"></attr>
+    </declare-styleable>
+
 </resources>

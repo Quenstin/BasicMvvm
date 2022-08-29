@@ -1,4 +1,4 @@
-package com.hdyj.basicmodel.ext
+package com.quenstin.basicmodel.ext
 
 import android.app.Activity
 import android.app.Dialog
@@ -10,7 +10,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.example.basicmodel.R
 import com.gyf.immersionbar.BarHide
 import com.gyf.immersionbar.ktx.immersionBar
-import com.hdyj.basicmodel.utils.NavigationBarUtils
+import com.quenstin.basicmodel.utils.NavigationBarUtils
 import java.lang.ref.WeakReference
 
 /**

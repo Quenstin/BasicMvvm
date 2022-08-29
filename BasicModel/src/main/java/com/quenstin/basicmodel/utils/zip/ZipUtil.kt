@@ -1,7 +1,6 @@
-package com.hdyj.basicmodel.utils.zip
+package com.quenstin.basicmodel.utils.zip
 
-import android.util.Log
-import com.hdyj.basicmodel.utils.hdyjLogd
+import com.quenstin.basicmodel.utils.hdyjLogd
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream

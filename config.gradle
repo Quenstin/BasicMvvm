@@ -158,8 +158,6 @@ ext {
             "refresh-layout-kernel"        : "io.github.scwang90:refresh-layout-kernel:2.0.5",//核心依赖
             "refresh-header-classics"      : "io.github.scwang90:refresh-header-classics:2.0.5",  //经典刷新
             "refresh-footer-classics"      : "io.github.scwang90:refresh-footer-classics:2.0.5",  //经典加载
-            //图片剪裁  https://github.com/Yalantis/uCrop
-//            "uCrop"                        : "com.github.yalantis:ucrop:2.2.8"
     ]
 
     google_library = google.values()

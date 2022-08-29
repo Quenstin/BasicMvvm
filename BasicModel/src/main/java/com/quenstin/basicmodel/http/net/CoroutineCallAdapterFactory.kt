@@ -1,4 +1,4 @@
-package com.hdyj.basicmodel.http.net
+package com.quenstin.basicmodel.http.net
 
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred

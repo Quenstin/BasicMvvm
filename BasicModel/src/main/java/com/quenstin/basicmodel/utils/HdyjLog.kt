@@ -1,9 +1,7 @@
-package com.hdyj.basicmodel.utils
+package com.quenstin.basicmodel.utils
 
 import com.blankj.utilcode.util.AppUtils
 import com.orhanobut.logger.Logger
-import java.lang.reflect.Array
-import java.util.*
 
 /**
  * Created by hdyjzgq

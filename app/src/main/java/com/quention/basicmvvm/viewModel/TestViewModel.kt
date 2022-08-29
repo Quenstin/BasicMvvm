@@ -16,8 +16,6 @@ class TestViewModel:BaseViewModel<TestRepository>() {
     val data = MutableLiveData<TestBean>()
 
     fun getBannerData() {
-        simpleLaunch(request = {
-            data.value = mRepository.getBanner()
-        })
+
     }
 }

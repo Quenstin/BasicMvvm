@@ -1,4 +1,4 @@
-package com.hdyj.basicmodel.ext
+package com.quenstin.basicmodel.ext
 
 import android.net.ParseException
 import androidx.lifecycle.MutableLiveData
@@ -7,10 +7,10 @@ import com.google.gson.JsonIOException
 import com.google.gson.JsonParseException
 import com.google.gson.JsonSyntaxException
 import com.google.gson.stream.MalformedJsonException
-import com.hdyj.basicmodel.state.State
-import com.hdyj.basicmodel.state.StateType
-import com.hdyj.basicmodel.utils.hdyjLoge
-import com.hdyj.basicmodel.viewmodel.BaseViewModel
+import com.quenstin.basicmodel.state.State
+import com.quenstin.basicmodel.state.StateType
+import com.quenstin.basicmodel.utils.hdyjLoge
+import com.quenstin.basicmodel.viewmodel.BaseViewModel
 import kotlinx.coroutines.*
 import org.json.JSONException
 import retrofit2.HttpException

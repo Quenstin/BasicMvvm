@@ -1,4 +1,4 @@
-package com.hdyj.basicmodel.utils.zip
+package com.quenstin.basicmodel.utils.zip
 
 /**
  * Created by hdyjzgq

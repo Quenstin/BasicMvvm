@@ -1,4 +1,4 @@
-package com.hdyj.basicmodel.utils
+package com.quenstin.basicmodel.utils
 
 import android.app.Activity
 import android.content.Context

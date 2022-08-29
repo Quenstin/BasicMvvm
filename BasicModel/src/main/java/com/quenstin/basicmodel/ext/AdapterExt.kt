@@ -1,11 +1,8 @@
-package com.hdyj.basicmodel.ext
+package com.quenstin.basicmodel.ext
 
 import android.content.Context
 import androidx.core.content.ContextCompat
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.hdyj.basicmodel.view.activity.BaseActivity
-import java.io.InputStream
-import java.io.OutputStream
 
 /**
  * Created by hdyjzgq

@@ -1,7 +1,7 @@
 package com.quention.basicmvvm
 
-import com.quenstin.basicmodel.BaseApplication
 import com.quenstin.basicmodel.http.RetrofitFactory
+import com.quenstin.basicmodel.BaseApplication
 
 /**
  * Created by hdyjzgq

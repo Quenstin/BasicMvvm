@@ -1,8 +1,7 @@
-package com.hdyj.basicmodel.utils
+package com.quenstin.basicmodel.utils
 
 import android.content.Context
 import android.os.storage.StorageManager
-import com.blankj.utilcode.util.FileUtils
 import java.io.File
 import java.lang.reflect.Array
 

@@ -1,4 +1,4 @@
-package com.hdyj.basicmodel.ext
+package com.quenstin.basicmodel.ext
 
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -6,8 +6,8 @@ import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.callback.NavigationCallback
 import com.alibaba.android.arouter.launcher.ARouter
-import com.hdyj.basicmodel.widget.ToastCustom
-import com.hdyj.basicmodel.view.fragment.BaseFragment
+import com.quenstin.basicmodel.widget.ToastCustom
+import com.quenstin.basicmodel.view.fragment.BaseFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 fun BaseFragment<*>.getResColor(color: Int)= ContextCompat.getColor(requireContext(),color)
 
 
-fun BaseFragment<*>.jumpActivity(path: String,titleKey:String,titleValue: String) {
+fun BaseFragment<*>.jumpActivity(path: String, titleKey:String, titleValue: String) {
     ARouter.getInstance().build(path).withString(titleKey, titleValue)
         .navigation(requireActivity(), object : NavigationCallback {
             override fun onFound(postcard: Postcard?) {

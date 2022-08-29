@@ -1,4 +1,4 @@
-package com.hdyj.basicmodel.repository
+package com.quenstin.basicmodel.repository
 
 /**
  * Created by hdyjzgq

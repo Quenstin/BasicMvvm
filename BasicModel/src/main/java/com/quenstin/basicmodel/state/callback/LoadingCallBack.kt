@@ -1,8 +1,5 @@
-package com.hdyj.basicmodel.state.callback
+package com.quenstin.basicmodel.state.callback
 
-import android.content.Context
-import android.view.View
-import android.view.Window
 import com.example.basicmodel.R
 import com.kingja.loadsir.callback.Callback
 

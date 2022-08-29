@@ -1,4 +1,4 @@
-package com.hdyj.basicmodel.utils
+package com.quenstin.basicmodel.utils
 
 import android.app.*
 import android.content.Context
@@ -10,9 +10,9 @@ import cn.dreamtobe.filedownloader.OkHttp3Connection
 import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.FileUtils
 import com.blankj.utilcode.util.Utils
-import com.hdyj.basicmodel.BaseApplication
-import com.hdyj.basicmodel.utils.zip.ZipListener
-import com.hdyj.basicmodel.utils.zip.ZipProgressUtil
+import com.quenstin.basicmodel.BaseApplication
+import com.quenstin.basicmodel.utils.zip.ZipListener
+import com.quenstin.basicmodel.utils.zip.ZipProgressUtil
 import com.liulishuo.filedownloader.BaseDownloadTask
 import com.liulishuo.filedownloader.FileDownloadListener
 import com.liulishuo.filedownloader.FileDownloader

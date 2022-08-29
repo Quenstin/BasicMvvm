@@ -1,9 +1,9 @@
-package com.hdyj.basicmodel.view.activity
+package com.quenstin.basicmodel.view.activity
 
 import android.os.Bundle
 import androidx.viewbinding.ViewBinding
-import com.hdyj.basicmodel.ext.inflateBindingWithGeneric
-import com.hdyj.basicmodel.ext.initBar
+import com.quenstin.basicmodel.ext.inflateBindingWithGeneric
+import com.quenstin.basicmodel.ext.initBar
 
 
 /**

@@ -1,4 +1,4 @@
-package com.hdyj.basicmodel.widget.dialog
+package com.quenstin.basicmodel.widget.dialog
 
 import android.app.Dialog
 import android.content.Context
@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.view.Gravity
 import com.example.basicmodel.R
 import com.example.basicmodel.databinding.CommonHProgressDialogBinding
-import com.hdyj.basicmodel.ext.setGravityStyle
-import com.hdyj.basicmodel.ext.setShapeBg
+import com.quenstin.basicmodel.ext.setGravityStyle
+import com.quenstin.basicmodel.ext.setShapeBg
 
 /**
  * Created by hdyjzgq

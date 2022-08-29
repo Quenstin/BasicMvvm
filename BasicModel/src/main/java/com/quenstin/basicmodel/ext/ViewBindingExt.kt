@@ -1,7 +1,7 @@
 
 @file:JvmName("ViewBindingUtil")
 @file:Suppress("UNCHECKED_CAST", "unused")
-package com.hdyj.basicmodel.ext
+package com.quenstin.basicmodel.ext
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

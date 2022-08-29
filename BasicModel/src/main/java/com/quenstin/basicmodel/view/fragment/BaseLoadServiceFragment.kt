@@ -1,16 +1,15 @@
-package com.hdyj.basicmodel.view.fragment
+package com.quenstin.basicmodel.view.fragment
 
 import android.text.TextUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.hdyj.basicmodel.http.net.manager.NetState
-import com.hdyj.basicmodel.state.State
-import com.hdyj.basicmodel.state.StateType
-import com.hdyj.basicmodel.state.callback.*
+import com.quenstin.basicmodel.state.State
+import com.quenstin.basicmodel.state.StateType
 import com.kingja.loadsir.callback.SuccessCallback
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
+import com.quenstin.basicmodel.state.callback.*
 
 /**
  * Created by hdyjzgq
@@ -67,7 +66,7 @@ abstract class BaseLoadServiceFragment:Fragment() {
      * 1:解析异常
      * 2:其他异常
      */
-    open fun showError(state:StateType) {
+    open fun showError(state: StateType) {
 
         when (state) {
             StateType.NETWORK_ERROR -> {
